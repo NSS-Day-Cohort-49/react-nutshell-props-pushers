@@ -7,7 +7,7 @@ export const MessageCard = ({message}) => {
 		<>
 		<section className="message">
 			<h3 className="message_title">{message.title}</h3>
-			<di>From: {message.user.name}</di>
+			<div>From: {message.user.name}</div>
 			<div className="message_message">{message.message}</div>
 		</section>
 
