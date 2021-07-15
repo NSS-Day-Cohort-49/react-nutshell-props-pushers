@@ -5,9 +5,9 @@ export const EventCard = ({ event }) => {
   return (
     <>
       <section className="event">
-        <h3 className="event_name">{event.name}</h3>
-        <div className="event_date">Date: {event.date}</div>
-        <div className="event_location">Location: {event.location}</div>
+        <h3 className="event_name">{event.eventName}</h3>
+        <div className="event_date">Date: {event.eventDate}</div>
+        <div className="event_location">Location: {event.eventLocation}</div>
       </section>
     </>
   );
