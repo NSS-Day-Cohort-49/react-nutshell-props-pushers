@@ -1,12 +1,22 @@
-import React from 'react'
-import { MessageCard } from './MessageCard'
-import "./Message.css"
+import React, { useEffect, useContext } from "react";
+import { MessageCard } from "./MessageCard";
+import { MessageContext } from "./MessageProvider";
+import "./Message.css";
 
+export const MessageList = () => {
+  const { messages, getMessages } = useContext(MessageContext);
 
-export const MessageList= () => {
-	return(
-		<>
+  useEffect(()=>{
+	console.log("useEffect: getMessages");
+	getMessages()
+  },[])
 
-		</>
-	)
-}
+  return (
+    <>
+    {console.log("MessageList - Render: messages", messages)}
+      {messages.map((message) => {
+        return <MessageCard key={message.id} message={message} />;
+      })}
+    </>
+  );
+};
