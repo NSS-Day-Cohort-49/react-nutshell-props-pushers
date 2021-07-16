@@ -1,5 +1,9 @@
 .article{
+
 	margin: 1rem;
-	border: .1rem solid grey;
-	padding: .25rem;
+	padding: 1rem;
+	border: rgba(128, 128, 128, 0.659) .1rem solid;
+	box-shadow: rgba(128, 128, 128, 0.187) .25rem .35rem;
+	border-radius: .75rem;
+
 }
