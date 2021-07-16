@@ -6,6 +6,8 @@ import { EventList } from "./event/EventList";
 import { EventProvider } from "./event/EventProvider";
 import { ArticleList } from "./article/ArticleList";
 import { ArticleProvider } from "./article/ArticleProvider";
+import { TaskList } from "./task/TaskList";
+import { TaskProvider } from "./task/TaskProvider";
 
 export const ApplicationViews = () => {
   return (
@@ -28,9 +30,13 @@ export const ApplicationViews = () => {
         </Route>
       </MessageProvider>
 
-      <Route path="/tasks">
+      <TaskProvider>
+        <Route path="/tasks">
         {/* Render the component for the user's tasks */}
-      </Route>
+          <TaskList />
+        </Route>
+      </TaskProvider>
+
       <EventProvider>
         <Route path="/events">
           {/* Render the component for the user's events */}
