@@ -7,9 +7,9 @@ export const MessageCard = ({ message }) => {
   return (
     <>
       <div className="card">
-        <div className="card-body">
+        <div className="messages card-body ">
           <div className="card-sender-wrapper">
-            <img href={message.user.profile_pic} alt={message.user.name}></img>
+            <img src={message.user.profile_pic} alt={message.user.name}></img>
             <div className="card-text">{message.user.name}</div>
             <div className="card-text">{message.user.email}</div>
           </div>
