@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from "react";
 import { MessageCard } from "./MessageCard";
 import { MessageContext } from "./MessageProvider";
 import "./Message.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export const MessageList = () => {
   const { messages, getMessages } = useContext(MessageContext);
