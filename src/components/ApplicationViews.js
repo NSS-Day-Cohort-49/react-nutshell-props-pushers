@@ -1,11 +1,13 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { MessageList } from "./message/MessageList";
-import { MessageProvider } from "./message/MessageProvider";
-import { EventList } from "./event/EventList";
-import { EventProvider } from "./event/EventProvider";
+import { MessageList } from "./messages/MessageList"
+import { MessageProvider } from "./messages/MessageProvider";
+import { EventList } from "./events/EventList";
+import { EventProvider } from "./events/EventProvider";
 import { ArticleList } from "./article/ArticleList";
 import { ArticleProvider } from "./article/ArticleProvider";
+import { TaskList } from "./tasks/TaskList"
+import { TaskProvider } from "./tasks/TaskProvider";
 
 export const ApplicationViews = () => {
   return (
@@ -28,9 +30,13 @@ export const ApplicationViews = () => {
         </Route>
       </MessageProvider>
 
-      <Route path="/tasks">
+      <TaskProvider>
+        <Route path="/tasks">
         {/* Render the component for the user's tasks */}
-      </Route>
+          <TaskList />
+        </Route>
+      </TaskProvider>
+
       <EventProvider>
         <Route path="/events">
           {/* Render the component for the user's events */}
