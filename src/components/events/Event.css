@@ -1,0 +1,38 @@
+.event {
+  margin: 1rem;
+  padding: 0.5rem;
+  border: 0.1rem solid grey;
+}
+.card {
+  margin: 1rem;
+  box-shadow: rgb(128 128 128 / 19%) 0.25rem 0.35rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.card-sender-wrapper {
+  /* display: flex; */
+  margin: 2rem 2rem 2rem 2em;
+  text-align: center;
+}
+.card-event-wrapper {
+  /* display: flex; */
+  margin: 3rem 2rem 2rem 2em;
+}
+
+.card-text {
+  margin: 0rem 1rem 0rem 1rem;
+}
+
+.card-body {
+  display: flex;
+}
+
+.card-title {
+  padding: 0rem 0rem 1rem 0rem;
+}
+
+/* .messages-card{
+	margin: 1rem;
+    box-shadow: rgb(128 128 128 / 19%) 0.25rem 0.35rem;
+} */

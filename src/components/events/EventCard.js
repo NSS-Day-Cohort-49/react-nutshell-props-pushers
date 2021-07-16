@@ -4,10 +4,14 @@ import "./Event.css";
 export const EventCard = ({ event }) => {
   return (
     <>
-      <section className="event">
-        <h3 className="event_name">{event.eventName}</h3>
-        <div className="event_date">Date: {event.eventDate}</div>
-        <div className="event_location">Location: {event.eventLocation}</div>
+      <section className="card">
+        <div className="events card-body">
+          <div className="card-sender-wrapper">
+            <h3 className="card-title">{event.eventName}</h3>
+          </div>
+          <h5 className="card-text">Date: {event.eventDate}</h5>
+          <h6 className="card_text">Location: {event.eventLocation}</h6>
+        </div>
       </section>
     </>
   );
