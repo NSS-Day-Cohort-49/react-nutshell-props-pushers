@@ -5,9 +5,10 @@ export const ArticleCard = ({ article }) => {
   return (
     <>
       <section className="article">
-        <h1>{article.title}</h1>
+        <h1>
+	<a href={article.url} rel="noreferrer">{article.title}</a>
+	</h1>
         <div>{article.synopsis}</div>
-	<div>{article.url}</div>
         <div>Posted by: {article.user.name}</div>
       </section>
 

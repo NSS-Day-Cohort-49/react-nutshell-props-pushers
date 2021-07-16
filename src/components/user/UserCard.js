@@ -1,20 +1,20 @@
 import React from "react";
-import "./Friend.css";
+import "./User.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-export const FriendCard = ({ friend }) => {
+export const UserCard = ({ user }) => {
   return (
     <>
       <div className="col">
         <div className="card">
           <div className="card-body">
             {/* <img
-              src={friend.user.profile_pic}
+              src={user.user.profile_pic}
               className="card-img-top"
-              alt={friend.user.name}
+              alt={user.user.name}
             /> */}
-            <h5 className="card-title">{friend.user.name}</h5>
-            <div className="card-text">{friend.user.email}</div>
+            <h5 className="card-title">{user.name}</h5>
+            <div className="card-text">{user.email}</div>
           </div>
         </div>
       </div>
