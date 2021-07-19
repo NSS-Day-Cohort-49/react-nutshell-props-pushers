@@ -1,8 +1,14 @@
-import React from "react";
+import React, {useContext} from "react";
+import { FriendContext } from "./FriendProvider";
 import "./Friend.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export const FriendCard = ({ friend }) => {
+	const { deleteFriend} = useContext(FriendContext)
+	const unfriend = () => {
+		deleteFriend(friend.id)
+	}
+
   return (
     <>
       <div className="col">
@@ -15,6 +21,7 @@ export const FriendCard = ({ friend }) => {
             /> */}
             <h5 className="card-title">{friend.user.name}</h5>
             <div className="card-text">{friend.user.email}</div>
+	    <button onClick={unfriend}>Unfriend</button>
           </div>
         </div>
       </div>
