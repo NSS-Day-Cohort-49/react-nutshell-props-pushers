@@ -12,10 +12,21 @@ export const MessageProvider= (props) => {
 		.then((res) => res.json())
 		.then(setMessages)
 	}
-	console.log(messages)
+
+	const addMessage = (messageObj) => {
+		return fetch("http://localhost:8088/messages", {
+			method: "POST",
+			headers: {
+			    "Content-Type": "application/json"
+			},
+			body: JSON.stringify(messageObj)
+		    })
+		    .then(getMessages)
+		}
+	
 	
 	return(
-		<MessageContext.Provider value={{messages, getMessages}} >
+		<MessageContext.Provider value={{messages, getMessages, addMessage}} >
 			{props.children}
 		</MessageContext.Provider>
 	)
