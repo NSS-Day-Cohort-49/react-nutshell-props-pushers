@@ -1,3 +1,10 @@
+.friend{
+	background-color: rgba(0, 255, 255, 0.374);
+}
+
+.not-friend{
+	background-color: rgba(255, 228, 196, 0.525);
+}
 .message {
   margin: 1rem;
   padding: 0.5rem;
@@ -36,3 +43,4 @@
 	margin: 1rem;
     box-shadow: rgb(128 128 128 / 19%) 0.25rem 0.35rem;
 } */
+

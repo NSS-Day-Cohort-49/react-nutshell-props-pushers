@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 import "./Message.css";
 import { FriendContext } from "../friends/FriendProvider";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -24,8 +24,10 @@ export const MessageCard = ({ message }) => {
 
   let foundFriend = friends.find((friend)=> (currentUser === friend.currentUserId && friend.userId === message.user.id) )
   console.log("friend Search", foundFriend)
-
-  
+  let friendStyling = "not-friend"
+ if (foundFriend) {
+   friendStyling = "friend"
+ } 
  const addNewFriend = ()=> {
 
   const newFriendObj = {
@@ -50,7 +52,7 @@ export const MessageCard = ({ message }) => {
             <img src={message.user.profile_pic} alt={message.user.name}></img>
             <div className="card-text">{message.user.name}</div>
             <div className="card-text">{message.user.email}</div>
-          {foundFriend? <><button onClick={unfriend}>Unfriend</button></> : <><button onClick={addNewFriend}>Add Friend</button></>}
+          {foundFriend? <><button className={friendStyling} onClick={unfriend}>Unfriend</button></> : <><button className={friendStyling} onClick={addNewFriend}>Add Friend</button></>}
           </div>
           <div className="card-message-wrapper">
             <h5 className="card-title">{message.title}</h5>
