@@ -14,7 +14,7 @@ export const MessageCard = ({ message }) => {
   console.log(message.user.profile_pic);
 
   const currentUser = parseInt(sessionStorage.getItem("nutshell_user"))
-  const {friends , getFriends, addFriend} = useContext(FriendContext)
+  const {friends , getFriends, addFriend, deleteFriend} = useContext(FriendContext)
 // add addFriends when provider is built
   
   useEffect(() => {
@@ -22,8 +22,25 @@ export const MessageCard = ({ message }) => {
   },[])
 
 
-  const foundFriend = friends.find((friend)=> currentUser === friend.currentUserId && friend.userId === message.user.id )
+  let foundFriend = friends.find((friend)=> (currentUser === friend.currentUserId && friend.userId === message.user.id) )
   console.log("friend Search", foundFriend)
+
+  
+ const addNewFriend = ()=> {
+
+  const newFriendObj = {
+    currentUserId: currentUser,
+    userId: message.userId
+  }
+
+  addFriend(newFriendObj)
+
+ }
+
+ const unfriend = ()=>{
+   
+  deleteFriend(foundFriend.id)
+ }
 
   return (
     <>
@@ -33,7 +50,7 @@ export const MessageCard = ({ message }) => {
             <img src={message.user.profile_pic} alt={message.user.name}></img>
             <div className="card-text">{message.user.name}</div>
             <div className="card-text">{message.user.email}</div>
-          {foundFriend? <></> : <><button>Add Friend</button></>}
+          {foundFriend? <><button onClick={unfriend}>Unfriend</button></> : <><button onClick={addNewFriend}>Add Friend</button></>}
           </div>
           <div className="card-message-wrapper">
             <h5 className="card-title">{message.title}</h5>
