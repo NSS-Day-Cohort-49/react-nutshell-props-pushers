@@ -10,6 +10,8 @@ export const ArticleList = () => {
     console.log("useEffect - getArticles");
     getArticles();
   }, []);
+  
+// repeat the same logic to find a friend and style the Articles accordingly 
 
   return (
     <>
