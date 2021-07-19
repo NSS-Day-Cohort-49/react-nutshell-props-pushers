@@ -6,6 +6,7 @@ import { EventList } from "./events/EventList";
 import { EventProvider } from "./events/EventProvider";
 import { ArticleList } from "./article/ArticleList";
 import { ArticleProvider } from "./article/ArticleProvider";
+import { ArticleForm } from "./article/ArticleForm";
 import { TaskList } from "./tasks/TaskList";
 import { TaskProvider } from "./tasks/TaskProvider";
 import { FriendProvider } from "./friends/FriendProvider";
@@ -22,6 +23,9 @@ export const ApplicationViews = () => {
         <Route exact path="/">
           {/* Render the component for news articles */}
           <ArticleList />
+        </Route>
+        <Route exact path="/articles/create">
+          <ArticleForm />
         </Route>
       </ArticleProvider>
 
@@ -42,10 +46,10 @@ export const ApplicationViews = () => {
 
       <MessageProvider>
         <FriendProvider>
-        <Route path="/messages">
-          {/* Render the component for the messages */}
-          <MessageList />
-        </Route>
+          <Route path="/messages">
+            {/* Render the component for the messages */}
+            <MessageList />
+          </Route>
         </FriendProvider>
       </MessageProvider>
 
