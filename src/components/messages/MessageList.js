@@ -14,10 +14,13 @@ export const MessageList = () => {
 
   return (
     <>
+
     {console.log("MessageList - Render: messages", messages)}
       {messages.map((message) => {
         return <MessageCard key={message.id} message={message} />;
+      
       })}
+      
     </>
   );
 };

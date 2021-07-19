@@ -1,9 +1,30 @@
-import React from "react";
+import React, {useContext, useState, useEffect} from "react";
 import "./Message.css";
+import { FriendContext } from "../friends/FriendProvider";
 import "bootstrap/dist/css/bootstrap.min.css";
+
+// Current user id 
+// getFriends to check if current user is friends with the poster
+// Conditionally render the button
+// build in the id of the posting user 
+// onclick for button to add the follow record
+// create new object to send to provider
 
 export const MessageCard = ({ message }) => {
   console.log(message.user.profile_pic);
+
+  const currentUser = parseInt(sessionStorage.getItem("nutshell_user"))
+  const {friends , getFriends, addFriend} = useContext(FriendContext)
+// add addFriends when provider is built
+  
+  useEffect(() => {
+    getFriends()
+  },[])
+
+
+  const foundFriend = friends.find((friend)=> currentUser === friend.currentUserId && friend.userId === message.user.id )
+  console.log("friend Search", foundFriend)
+
   return (
     <>
       <div className="card">
@@ -12,6 +33,7 @@ export const MessageCard = ({ message }) => {
             <img src={message.user.profile_pic} alt={message.user.name}></img>
             <div className="card-text">{message.user.name}</div>
             <div className="card-text">{message.user.email}</div>
+          {foundFriend? <></> : <><button>Add Friend</button></>}
           </div>
           <div className="card-message-wrapper">
             <h5 className="card-title">{message.title}</h5>
