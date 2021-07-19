@@ -42,10 +42,12 @@ export const ApplicationViews = () => {
       </FriendProvider>
 
       <MessageProvider>
+        <FriendProvider>
         <Route path="/messages">
           {/* Render the component for the messages */}
           <MessageList />
         </Route>
+        </FriendProvider>
       </MessageProvider>
 
       <TaskProvider>
