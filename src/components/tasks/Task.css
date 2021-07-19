@@ -2,11 +2,18 @@
 
 
 
-.task {
-    border: 1px dotted blue;
-    margin: 1rem;
+.task_list {
+    display: flex;
+    flex-wrap: wrap;
 }
 
-h1 {
+.task {
+    border: 1px dotted blue;
+    margin: 1em;
+    padding: 5px;
+    flex-basis: auto;
+}
+
+.task_header {
     font-family: "Nanum Pen Script", sans-serif;
 }

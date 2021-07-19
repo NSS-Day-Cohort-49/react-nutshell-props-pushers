@@ -6,8 +6,9 @@ export const TaskCard= ( {task} ) => {
 	return(
 		<>
 		<section className="task" key="tasks">
-			<h1>{task.task}</h1>
-			<div>{task.user.name}</div>
+			<h1 className="task_header">{task.task}</h1>
+			<div className="date">Expected completion: {task.date}</div>
+			<div>Assigned to: {task.user.name}</div>
 		</section>
 
 		</>

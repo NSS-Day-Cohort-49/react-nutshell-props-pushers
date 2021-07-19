@@ -2,11 +2,12 @@ import React, {useContext, useEffect} from 'react'
 import { TaskCard } from './TaskCard'
 import "./Task.css"
 import { TaskContext } from './TaskProvider'
-
+import { useHistory } from 'react-router'
 
 export const TaskList= () => {
 
 	const {tasks, getTasks } = useContext(TaskContext)
+	const history = useHistory()
 
 	useEffect(()=> {
 		console.log("useEffect - getTasks")
@@ -16,15 +17,19 @@ export const TaskList= () => {
 
 	return(
 		<>
-		<div className="task_list">
-			{console.log("TaskList - Render", tasks)}
-		{tasks.map(task => {
-			if (task.isComplete === false) {
-			return(
-				<TaskCard key={task.id} task={task} />
-			)
-		}})}
-		</div>
+		<div><button onClick={() => {history.push("/tasks/create")}}>
+			Create a New Task</button></div>
+			<section className="task_group">
+				<div className="task_list">
+					{console.log("TaskList - Render", tasks)}
+				{tasks.map(task => {
+					if (task.isComplete !== true) {
+					return(
+						<TaskCard key={task.id} task={task} />
+					)
+				}})}
+				</div>
+			</section>
 		</>
 	
 	)
