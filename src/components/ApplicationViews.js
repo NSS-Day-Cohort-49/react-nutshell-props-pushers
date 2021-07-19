@@ -49,12 +49,12 @@ export const ApplicationViews = () => {
       </MessageProvider>
 
       <TaskProvider>
-      <UserProvider>
+        <UserProvider>
           <Route path = "/tasks/create">
             <TaskForm />
           </Route>
         </UserProvider>
-        
+
         <Route path="/tasks">
           {/* Render the component for the user's tasks */}
           <TaskList />
