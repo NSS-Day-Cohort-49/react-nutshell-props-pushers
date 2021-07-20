@@ -14,9 +14,27 @@ export const UserProvider= (props) => {
 		.then(setUsers)
 	}
 	console.log(users)
+
+	const addUser = (newUserObj) => {
+		return fetch("http://localhost:8088/users",{
+		method: "POST",
+		headers:{
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(newUserObj)})
+		.then(getUsers)
+		
+	}
+  
+	const deleteUser = (id) => {
+		return fetch(`http://localhost:8088/users/${id}`,
+		{method:"DELETE"})
+		.then(getUsers)
+	}
+	  
 	
 	return(
-		<UserContext.Provider value={{users, getUsers, searchTerms, setSearchTerms}} >
+		<UserContext.Provider value={{users, getUsers, searchTerms, setSearchTerms, addUser, deleteUser}} >
 			{props.children}
 		</UserContext.Provider>
 	)

@@ -1,5 +1,5 @@
-import React, { useContext, useState, useEffect } from 'react'
-import { useHistory, useParams } from 'react-router-dom'
+import React, { useContext } from 'react'
+import { useHistory } from 'react-router-dom'
 import "./Task.css"
 import { TaskContext } from './TaskProvider'
 
@@ -9,7 +9,6 @@ export const TaskCard = ( {task} ) => {
 	const { completeTask, deleteTask} = useContext(TaskContext)
   
 	const history = useHistory();
-	const { taskId } = useParams();
   
 
 	const handleCompleteTask = () => {
