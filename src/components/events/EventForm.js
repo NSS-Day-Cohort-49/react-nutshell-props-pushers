@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { EventContext } from "./EventProvider";
-import { UserContext } from "../user/UserProvider";
-import { FriendContext } from "../friends/FriendProvider"
 import { useHistory } from 'react-router-dom';
 import "./Event.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -11,101 +9,122 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 export const EventForm = () => {
     const { getEvents, addEvent } = useContext(EventContext)
-    const { users, getUsers } = useContext(UserContext)
-    const { friends, getFriends } = useContext(FriendContext)
-    const [event, setEvent] = useState({})
+    const [event, setEvent] = useState({
+      // currentUserId: "",
+      // eventName: "",
+      // eventDate: "",
+      // eventLocation: "",
+      // eventZipcode: ""
+    },)
+
     const [isLoading, setIsLoading] = useState(true);
-    const history = useHistory
-    const currentUser = parseInt(sessionStorage.getItem("nutshell_user"))
+    const history = useHistory();
+
+    const currentUser = parseInt(sessionStorage.getItem("nutshell_user"));
+    
+     //when a field changes, update state. The return will re-render and display based on the values in state
+  //Controlled component
+  const handleControlledInputChange = (event) => {
+    /* When changing a state object or array,
+    always create a copy, make changes, and then set state.*/
+    const newEvent = { ...event}
+    /* Animal is an object with properties.
+    Set the property to the new value
+    using object bracket notation. */
+    newEvent[event.target.id] = event.target.value;
+    // update state
+    setEvent(newEvent)
+  } 
+
+  // const handleSaveMessage = () => {
+  //   if (messageId) {
+  //     updateMessage(message).then(history.push("/messages"));
+  //   } else {
+  //     addMessage(message).then(history.push("/messages"));
+  //   }
+  // };
+  
+  const handleClickSaveEvent = () => {
+      // Prevent browser from submitting the form and refreshing the page
+      event.preventDefault() 
+        // const newEvent = {
+        //   currentUserId: currentUser,
+        //   eventName: event.eventName,
+        //   eventDate: event.eventDate,
+        //   eventLocation: event.eventLocation,
+        //   eventZipcode: event.zipcode
+        // }
+        console.log(newEvent)
+        addEvent(newEvent)
+        .then(() => history.push("/events"))
+      }
+  
 
     useEffect (() => {
-        getEvents().then(getUsers).then(getFriends).then(() => {
-        
-        }
-        )
-    }, [])
-
-
-    const handleControlledInputChange = (event) => {
-        /* When changing a state object or array,
-        always create a copy, make changes, and then set state.*/
-        const newEvent = { ...event }
-        /* Event is an object with properties.
-        Set the property to the new value
-        using object bracket notation. */
-        event[event.target.id] = event.target.value
-        // update state
-        setEvent(newEvent)
-      }
+      getEvents().then(event => {
+      setEvent(event)
+      setIsLoading(false)
+          })
+        }, [])
       
-    const handleAddEvent = () => {
-      event.preventDefault() // Prevent browser from submitting the form and refreshing the page
-    // if input = "", window alert: "Please complete all fields"
-      if if (event.eventName == null || event.eventName == "", event.eventDate == null || event.eventDate == "", c == null || c == "", d == null || d == "") {
-        alert("Please Fill All Required Field");
-    const newEventObj = {
-        currentUserId: currentUser,
-        eventName: "",
-        eventDate: "",
-        eventLocation: "",
-        eventZipcode: ""
-    }
-  
-    handleAddEvent(newEventObj)
-    .then(() => history.push("/events"))
-   }
+        
+      
 
-   addEvent({
-    currentUserId: currentUser,
-    eventName: event.eventName,
-    eventDate: event.eventDate,
-    eventLocation: event.eventLocation,
-    eventZipcode: event.zipcode
-  })
-    .then(() => history.push("/animals"))
+ // return ternary button syntax: {eventId ? <>Save event</> : <>Add event</>}
 
-   return (
-    <form className="eventForm">
+      return (
+        <form className="eventForm">
       <h2 className="eventForm__title">New Event</h2>
       <fieldset>
         <div className="form-group">
           <label htmlFor="name">event name:</label>
-          <input type="text" id="name" required autoFocus className="form-control" placeholder="event name" value={event.eventName} onChange={handleControlledInputChange} />
+          <input type="text" id="name" required autoFocus className="form-control" placeholder="event name" 
+          value={event.eventName} onChange={handleControlledInputChange} />
         </div>
       </fieldset>
       <fieldset>
         <div className="form-group">
           <label htmlFor="name">event date:</label>
-          <input type="date" id="date" required autoFocus className="form-control" placeholder="mm/dd/yyyy" value={event.eventDate} onChange={handleControlledInputChange} />
+          <input type="date" id="date" required autoFocus className="form-control" placeholder="mm/dd/yyyy" 
+          value={event.eventDate} onChange={handleControlledInputChange} />
         </div>
       </fieldset>
       <fieldset>
         <div className="form-group">
           <label htmlFor="location">event location: </label>
-          <input type="text" name="location" id="location" className="form-control" placeholder="street address" value={event.eventLocation} onChange={handleControlledInputChange} />
+          <input type="text" name="location" id="location" className="form-control" placeholder="street address" 
+          value={event.eventLocation} onChange={handleControlledInputChange} />
         </div>
       </fieldset>
       <fieldset>
         <div className="form-group">
           <label htmlFor="zipcode">event zipcode: </label>
-          <input type="text" name="zipcode" id="zipcode" className="form-control" placeholder="5-digit code" value={event.zipcode} onChange={handleControlledInputChange} />
+          <input type="text" name="zipcode" id="zipcode" className="form-control" placeholder="5-digit code" 
+          value={event.zipcode} onChange={handleControlledInputChange} />
         </div>
       </fieldset>
       <button className="btn btn-primary"
         disabled={isLoading}
         onClick={newEventObj => {
-          handleAddEvent()
+          handleClickSaveEvent()
         }}>
             <>Save New Event </>
       </button>
     </form>
-  )
-}
+      )
+      }
+      
 
-/* const handleSaveevent = () => {
-    if (parseInt(event.locationId) === 0 || parseInt(event.customerId) === 0) {
-        window.alert("Please select a location and a customer")
-        */
-
-
-        {/* {eventId ? <>Save event</> : <>Add event</>} */}
+//  //when a field changes, update state. The return will re-render and display based on the values in state
+//   //Controlled component
+//   const handleControlledInputChange = (event) => {
+//     /* When changing a state object or array,
+//     always create a copy, make changes, and then set state.*/
+//     const newTask = { ...task }
+//     /* Animal is an object with properties.
+//     Set the property to the new value
+//     using object bracket notation. */
+//     newTask[event.target.id] = event.target.value
+//     // update state
+//     setTask(newTask)
+//   }

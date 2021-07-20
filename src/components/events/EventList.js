@@ -15,11 +15,13 @@ export const EventList = () => {
 
   return (
     <>
-    <div className="button-events"><button className="addButton" onClick={() => history.push("/events/create")}>
-          Add New Event
+    <div className="button-events">
+      <button className="addButton" onClick={() => history.push("/events/create")}>
+          Add a New Event?
             </button>
       </div>
       {events.map((event) => {
+        // if event is most recent one, style differently 
         return <EventCard key={event.id} event={event} />;
       })}
     </>
