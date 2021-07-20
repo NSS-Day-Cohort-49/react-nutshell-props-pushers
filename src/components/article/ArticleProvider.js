@@ -21,12 +21,19 @@ export const ArticleProvider = (props) => {
     }).then(getArticles);
   };
 
+  const deleteArticle = (articleId) => {
+    return fetch(`http://localhost:8088/articles/${articleId}`, {
+      method: "DELETE",
+    }).then(getArticles);
+  };
+
   return (
     <>
       <ArticleContext.Provider
         value={{
           articles,
           getArticles,
+          deleteArticle,
           addArticle,
         }}
       >

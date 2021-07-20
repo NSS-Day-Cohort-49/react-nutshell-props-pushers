@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 
 export const ArticleList = () => {
   const { articles, getArticles } = useContext(ArticleContext);
+
   const history = useHistory();
 
   useEffect(() => {
@@ -13,7 +14,12 @@ export const ArticleList = () => {
     getArticles();
   }, []);
 
-  // const sortedArticles = articles.sort();
+  const sortedArticles = articles.sort((a, b) => {
+    return (
+      parseInt(b.timestamp.split("/").join("")) -
+      parseInt(a.timestamp.split("/").join(""))
+    );
+  });
   // repeat the same logic to find a friend and style the Articles accordingly
 
   return (
@@ -27,8 +33,8 @@ export const ArticleList = () => {
         Add New Article
       </button>
       <div className="article_list">
-        {console.log("ArticleList - Render", articles)}
-        {articles.map((article) => {
+        {console.log("ArticleList - Render", sortedArticles)}
+        {sortedArticles.map((article) => {
           return <ArticleCard key={article.id} article={article} />;
         })}
       </div>

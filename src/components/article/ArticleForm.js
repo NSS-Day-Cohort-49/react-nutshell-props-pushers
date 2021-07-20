@@ -29,7 +29,7 @@ export const ArticleForm = () => {
       title: article.title,
       synopsis: article.synopsis,
       url: article.url,
-      timestamp: ts.toISOString(),
+      timestamp: ts.toLocaleDateString(),
       userId: currentUser,
     };
     addArticle(newArticle).then(() => history.push("/"));
