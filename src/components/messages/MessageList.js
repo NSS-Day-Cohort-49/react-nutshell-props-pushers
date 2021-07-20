@@ -7,27 +7,28 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 export const MessageList = () => {
   const { messages, getMessages } = useContext(MessageContext);
-  const history = useHistory()
+  const history = useHistory();
 
-  useEffect(()=>{
-	console.log("useEffect: getMessages");
-	getMessages()
-  },[])
+  const sortedMessages = messages.sort((a, b) => {
+    return parseInt(b.id) - parseInt(a.id);
+  });
 
-  const handleSendNewMessage = ()=>{
-        history.push("./messages/new")
-  }
+  useEffect(() => {
+    console.log("useEffect: getMessages");
+    getMessages();
+  }, []);
+
+  const handleSendNewMessage = () => {
+    history.push("./messages/new");
+  };
 
   return (
     <>
-
-    {console.log("MessageList - Render: messages", messages)}
-    <button onClick={handleSendNewMessage}>Send New Message</button>
-      {messages.map((message) => {
+      {console.log("MessageList - Render: messages", messages)}
+      <button onClick={handleSendNewMessage}>Send New Message</button>
+      {sortedMessages.map((message) => {
         return <MessageCard key={message.id} message={message} />;
-      
       })}
-      
     </>
   );
 };

@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import "./Message.css";
 import { FriendContext } from "../friends/FriendProvider";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { MessageContext } from "./MessageProvider";
 
 // Current user id
 // getFriends to check if current user is friends with the poster
@@ -11,8 +12,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // create new object to send to provider
 
 export const MessageCard = ({ message }) => {
-  console.log(message.user.profile_pic);
-
+  
+  const { deleteMessage } = useContext(MessageContext)
   const currentUser = parseInt(sessionStorage.getItem("nutshell_user"));
   const { friends, getFriends, addFriend, deleteFriend } =
     useContext(FriendContext);
@@ -26,6 +27,18 @@ export const MessageCard = ({ message }) => {
     (friend) =>
       currentUser === friend.currentUserId && friend.userId === message.user.id
   );
+
+  let isCurrentUser = null
+    
+  if (currentUser === message.userId){
+    
+      isCurrentUser = true
+    }else{
+      
+      isCurrentUser = null
+    }
+  
+ 
 
   let friendStyling = "not-friend";
   if (foundFriend) {
@@ -44,6 +57,11 @@ export const MessageCard = ({ message }) => {
     deleteFriend(foundFriend.id);
   };
 
+  const handleDeleteMessage = () => {
+    deleteMessage(message.id)
+  }
+ 
+
   return (
     <>
       <div className="card">
@@ -54,7 +72,7 @@ export const MessageCard = ({ message }) => {
               {message.user.name}
             </div>
             <div className="card-text">{message.user.email}</div>
-            {foundFriend? (
+            {foundFriend ? (
               <>
                 <button className={friendStyling} onClick={unfriend}>
                   Unfriend
@@ -67,6 +85,7 @@ export const MessageCard = ({ message }) => {
                 </button>
               </>
             )}
+          {isCurrentUser? (<><button key={message.id}onClick={handleDeleteMessage}>Delete Message</button><button>Edit Message</button></>):(<></>)}
           </div>
           <div className="card-message-wrapper">
             <h5 className="card-title">{message.title}</h5>
