@@ -1,6 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import { MessageList } from "./messages/MessageList";
+import { MessageForm } from "./messages/MessageForm";
 import { MessageProvider } from "./messages/MessageProvider";
 import { EventList } from "./events/EventList";
 import { EventProvider } from "./events/EventProvider";
@@ -47,19 +48,25 @@ export const ApplicationViews = () => {
 
       <MessageProvider>
         <FriendProvider>
-          <Route path="/messages">
-            {/* Render the component for the messages */}
-            <MessageList />
-          </Route>
+          <UserProvider>
+            <Route exact path="/messages">
+              {/* Render the component for the messages */}
+              <MessageList />
+            </Route>
+
+            <Route exact path="/messages/new">
+              <MessageForm />
+            </Route>
+          </UserProvider>
         </FriendProvider>
       </MessageProvider>
 
       <TaskProvider>
         <UserProvider>
-          <Route exact path = "/tasks/create">
+          <Route exact path="/tasks/create">
             <TaskForm />
           </Route>
-          <Route exact path = "/tasks/edit/:taskId(\d+)">
+          <Route exact path="/tasks/edit/:taskId(\d+)">
             <TaskForm />
           </Route>
         </UserProvider>
