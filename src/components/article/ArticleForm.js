@@ -1,39 +1,57 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ArticleContext } from "./ArticleProvider";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import "./Article.css";
 
 export const ArticleForm = () => {
-  const { addArticle } = useContext(ArticleContext);
+  const { addArticle, getArticleById, updateArticle } =
+    useContext(ArticleContext);
 
-  const [article, setArticle] = useState({
-    title: "",
-    synopsis: "",
-    url: "",
-  });
+  const [isLoading, setIsLoading] = useState(true);
+
+  const [article, setArticle] = useState({});
+
+  const { articleId } = useParams();
 
   const history = useHistory();
+  const currentUser = parseInt(sessionStorage.getItem("nutshell_user"));
+  const ts = new Date();
 
   const handleControlledInputChange = (event) => {
     const newArticle = { ...article };
     newArticle[event.target.id] = event.target.value;
     setArticle(newArticle);
   };
+
   const handleClickSaveArticle = (event) => {
     event.preventDefault();
-
-    const currentUser = parseInt(sessionStorage.getItem("nutshell_user"));
-    const ts = new Date();
-
-    const newArticle = {
-      title: article.title,
-      synopsis: article.synopsis,
-      url: article.url,
-      timestamp: ts.toLocaleDateString(),
-      userId: currentUser,
-    };
-    addArticle(newArticle).then(() => history.push("/"));
+    if (article.title === "" || article.synopsis === "" || article.url === "") {
+      window.alert("Please complete the form");
+    } else if (articleId) {
+      updateArticle(article).then(() => history.push("/"));
+    } else {
+      const newArticle = {
+        title: article.title,
+        synopsis: article.synopsis,
+        url: article.url,
+        timestamp: ts.toLocaleDateString(),
+        userId: currentUser,
+      };
+      addArticle(newArticle).then(() => history.push("/"));
+    }
   };
+
+  useEffect(() => {
+    if (articleId) {
+      getArticleById(articleId).then((article) => {
+        setArticle(article);
+        console.log(article);
+        setIsLoading(false);
+      });
+    } else {
+      setIsLoading(false);
+    }
+  }, []);
 
   return (
     <form className="animalForm">
@@ -48,7 +66,7 @@ export const ArticleForm = () => {
             autoFocus
             className="form-control"
             placeholder="Article Title"
-            value={article.newsTitle}
+            value={article.title}
             onChange={handleControlledInputChange}
           />
         </div>
@@ -83,8 +101,12 @@ export const ArticleForm = () => {
           />
         </div>
       </fieldset>
-      <button className="btn btn-primary" onClick={handleClickSaveArticle}>
-        Save New Article
+      <button
+        className="btn btn-primary"
+        disabled={isLoading}
+        onClick={handleClickSaveArticle}
+      >
+        {articleId ? <>Update Article</> : <>Save Article</>}
       </button>
     </form>
   );

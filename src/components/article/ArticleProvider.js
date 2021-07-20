@@ -21,9 +21,25 @@ export const ArticleProvider = (props) => {
     }).then(getArticles);
   };
 
+  const getArticleById = (id) => {
+    return fetch(`http://localhost:8088/articles/${id}`).then((res) =>
+      res.json()
+    );
+  };
+
   const deleteArticle = (articleId) => {
     return fetch(`http://localhost:8088/articles/${articleId}`, {
       method: "DELETE",
+    }).then(getArticles);
+  };
+
+  const updateArticle = (article) => {
+    return fetch(`http://localhost:8088/articles/${article.id}?`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(article),
     }).then(getArticles);
   };
 
@@ -35,6 +51,8 @@ export const ArticleProvider = (props) => {
           getArticles,
           deleteArticle,
           addArticle,
+          updateArticle,
+          getArticleById,
         }}
       >
         {props.children}

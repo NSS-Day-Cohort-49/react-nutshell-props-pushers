@@ -1,9 +1,14 @@
-.article{
+.article {
+  margin: 1rem;
+  padding: 1rem;
+  border: rgba(128, 128, 128, 0.659) 0.1rem solid;
+  box-shadow: rgba(128, 128, 128, 0.187) 0.25rem 0.35rem;
+  border-radius: 0.75rem;
+}
 
-	margin: 1rem;
-	padding: 1rem;
-	border: rgba(128, 128, 128, 0.659) .1rem solid;
-	box-shadow: rgba(128, 128, 128, 0.187) .25rem .35rem;
-	border-radius: .75rem;
-
+.button {
+  margin: 0.25rem;
+  padding: 0.25rem;
+  border: rgba(128, 128, 128, 0.659) 0.1rem solid;
+  background-color: rgba(0, 255, 166, 0.427);
 }
