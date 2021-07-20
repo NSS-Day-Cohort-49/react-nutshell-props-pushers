@@ -29,10 +29,23 @@ export const MessageProvider= (props) => {
 				method:"DELETE"})
 				.then(getMessages)
 		}
-	
+		const getMessageById = (id) =>{
+			return fetch(`http://localhost:8088/messages/${id}`)
+			.then(res=>res.json())
+		}
+
+		const updateMessage = (messageObj) =>{
+			return fetch(`http://localhost:8088/messages/${messageObj.id}`,{
+				method:"PUT",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify(messageObj)
+			}).then(getMessages)
+		}
 	
 	return(
-		<MessageContext.Provider value={{messages, getMessages, addMessage, deleteMessage}} >
+		<MessageContext.Provider value={{messages, getMessages, addMessage, deleteMessage, getMessageById, updateMessage}} >
 			{props.children}
 		</MessageContext.Provider>
 	)

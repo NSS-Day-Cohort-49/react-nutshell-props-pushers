@@ -3,6 +3,7 @@ import "./Message.css";
 import { FriendContext } from "../friends/FriendProvider";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { MessageContext } from "./MessageProvider";
+import { useHistory } from "react-router";
 
 // Current user id
 // getFriends to check if current user is friends with the poster
@@ -13,6 +14,7 @@ import { MessageContext } from "./MessageProvider";
 
 export const MessageCard = ({ message }) => {
   
+  const history = useHistory()
   const { deleteMessage } = useContext(MessageContext)
   const currentUser = parseInt(sessionStorage.getItem("nutshell_user"));
   const { friends, getFriends, addFriend, deleteFriend } =
@@ -61,6 +63,11 @@ export const MessageCard = ({ message }) => {
   const handleDeleteMessage = () => {
     deleteMessage(message.id)
   }
+
+  const handleUpdateMessage = ()=> {
+   
+      history.push(`/messages/edit/${message.id}`)}
+  
  
 
   return (
@@ -86,7 +93,7 @@ export const MessageCard = ({ message }) => {
                 </button>
               </>
             )}
-          {isCurrentUser? (<><button key={message.id}onClick={handleDeleteMessage}>Delete Message</button><button>Edit Message</button></>):(<></>)}
+          {isCurrentUser? (<><button key={message.id}onClick={handleDeleteMessage}>Delete Message</button><button key={message.id} value={message.id} onClick={handleUpdateMessage}>Edit Message</button></>):(<></>)}
           </div>
           <div className="card-message-wrapper">
             <h5 className="card-title">{message.title}</h5>
