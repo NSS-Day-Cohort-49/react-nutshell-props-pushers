@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 // √ render event card when invoked by EventList
 // √ map through events, render those filtered current user and by friend
-// addNewEvent function renders EventForm on click
+// √ addNewEvent function renders EventForm on click
 // when events <= 1, style next event
 // delete button deletes event from db. redirects to event list
 // "show weather" button displays weather for date of event when clicked

@@ -11,8 +11,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 export const EventForm = () => {
     const { getEvents, addEvent } = useContext(EventContext)
-    const { getUsers } = useContext(UserContext)
-    const { getFriends } = useContext(FriendContext)
+    const { users, getUsers } = useContext(UserContext)
+    const { friends, getFriends } = useContext(FriendContext)
     const [event, setEvent] = useState({})
     const [isLoading, setIsLoading] = useState(true);
     const history = useHistory
@@ -33,12 +33,13 @@ export const EventForm = () => {
         /* Event is an object with properties.
         Set the property to the new value
         using object bracket notation. */
-        newEvent[event.target.id] = event.target.value
+        event[event.target.id] = event.target.value
         // update state
         setEvent(newEvent)
       }
       
-    const addNewEvent = () => {
+    const handleAddEvent = () => {
+      event.preventDefault() // Prevent browser from submitting the form and refreshing the page
     // if input = "", window alert: "Please complete all fields"
     const newEventObj = {
         currentUserId: currentUser,
@@ -48,7 +49,7 @@ export const EventForm = () => {
         eventZipcode: ""
     }
   
-    addEvent(newEventObj)
+    handleAddEvent(newEventObj)
     .then(() => history.push("/events"))
    }
 
@@ -81,9 +82,8 @@ export const EventForm = () => {
       </fieldset>
       <button className="btn btn-primary"
         disabled={isLoading}
-        onClick={event => {
-          event.preventDefault() // Prevent browser from submitting the form and refreshing the page
-          addNewEvent()
+        onClick={newEventObj => {
+          handleAddEvent()
         }}>
             <>Save New Event </>
       </button>
