@@ -17,13 +17,13 @@ export const TaskList= () => {
 
 	return(
 		<>
-		<div><button onClick={() => {history.push("/tasks/create")}}>
-			Create a New Task</button></div>
+		<div className="newtaskbtn"><button className="btn" onClick={() => {history.push("/tasks/create")}}>
+			Got a New Task?</button></div>
 			<section className="task_group">
 				<div className="task_list">
 					{console.log("TaskList - Render", tasks)}
 				{tasks.map(task => {
-					if (task.isComplete !== true) {
+					if (task.isCompleted === false && task.userId === parseInt(sessionStorage.getItem("nutshell_user"))) {
 					return(
 						<TaskCard key={task.id} task={task} />
 					)

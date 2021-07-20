@@ -34,7 +34,17 @@ export const TaskForm = () => {
   const handleClickSaveTask = () => {
     if (task.task === "" || task.date === "") {
         window.alert("Please complete the form")
-    } else {
+    } else if (taskId) {
+			updateTask({
+			id: task.id,
+			task: task.task,
+			date: task.date,
+			userId: parseInt(sessionStorage.getItem("nutshell_user")),
+			isCompleted: false
+			})
+		.then(() => history.push("/tasks"))
+		}
+    else {
         const newTask = {
           task: task.task,
           date: task.date,
@@ -45,7 +55,6 @@ export const TaskForm = () => {
         .then(() => history.push("/tasks"))
       }
     }
-  
 
   useEffect(() => {
     if (taskId) {
@@ -80,7 +89,7 @@ return (
                     handleClickSaveTask()
                 }
             }>
-                Save task
+                 {taskId ? <>Update Task</> : <>Save Task</>}
             </button>
         </form>
     )

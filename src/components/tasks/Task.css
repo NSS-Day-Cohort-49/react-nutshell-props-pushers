@@ -17,3 +17,27 @@
 .task_header {
     font-family: "Nanum Pen Script", sans-serif;
 }
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.btn {
+    border-radius: 10%;
+    border: black dotted 2px;
+    padding: 1px;
+}
+
+.checked {
+    border-radius: 10%;
+    border: black dotted 2px;
+    padding: 1px;
+}
+
+.newtaskbtn{
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+}
