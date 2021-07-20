@@ -96,3 +96,10 @@ export const EventCard = ({ event }) => {
     //     </>
     //   );
     // };
+
+ 
+    /*  const deleteMessage = (id) =>{
+			return fetch(`http://localhost:8088/messages/${id}`,{
+				method:"DELETE"})
+				.then(getMessages)
+		}  */

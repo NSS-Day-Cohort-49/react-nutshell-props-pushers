@@ -41,6 +41,8 @@ export const EventForm = () => {
     const handleAddEvent = () => {
       event.preventDefault() // Prevent browser from submitting the form and refreshing the page
     // if input = "", window alert: "Please complete all fields"
+      if if (event.eventName == null || event.eventName == "", event.eventDate == null || event.eventDate == "", c == null || c == "", d == null || d == "") {
+        alert("Please Fill All Required Field");
     const newEventObj = {
         currentUserId: currentUser,
         eventName: "",
@@ -52,6 +54,15 @@ export const EventForm = () => {
     handleAddEvent(newEventObj)
     .then(() => history.push("/events"))
    }
+
+   addEvent({
+    currentUserId: currentUser,
+    eventName: event.eventName,
+    eventDate: event.eventDate,
+    eventLocation: event.eventLocation,
+    eventZipcode: event.zipcode
+  })
+    .then(() => history.push("/animals"))
 
    return (
     <form className="eventForm">
