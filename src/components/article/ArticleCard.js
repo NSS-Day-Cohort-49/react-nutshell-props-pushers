@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import "./Article.css";
 import { ArticleContext } from "./ArticleProvider";
+import { useHistory } from "react-router-dom";
 
 export const ArticleCard = ({ article }) => {
   const { deleteArticle } = useContext(ArticleContext);
@@ -8,6 +9,8 @@ export const ArticleCard = ({ article }) => {
   const handleDelete = () => {
     deleteArticle(article.id);
   };
+
+  const history = useHistory();
 
   return (
     <>
@@ -19,7 +22,17 @@ export const ArticleCard = ({ article }) => {
         </h1>
         <div>{article.synopsis}</div>
         <div>Posted by: {article.user.name}</div>
-        <button onClick={handleDelete}>Delete Article</button>
+        <button
+          className="button"
+          onClick={() => {
+            history.push(`/articles/edit/${article.id}`);
+          }}
+        >
+          Edit Article
+        </button>
+        <button className="button" onClick={handleDelete}>
+          Delete Article
+        </button>
       </section>
     </>
   );
