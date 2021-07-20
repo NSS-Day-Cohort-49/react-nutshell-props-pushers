@@ -54,3 +54,9 @@
 .new-message-button{
 	margin:2rem 10rem 0rem 10rem;
 }
+
+.profilepic{
+  border-radius: 25%;
+  height: 15em;
+  width: auto;
+}

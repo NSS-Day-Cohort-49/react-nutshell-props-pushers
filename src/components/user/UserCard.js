@@ -48,17 +48,14 @@ export const UserCard = ({ user }) => {
             <h5 className="card-title">{user.name}</h5>
             <div className="card-text">{user.email}</div>
             <div>            
-            {foundFriend ? (
+            { user.id === currentUser ? (
               <>
-                <button className={friendStyling} onClick={unfriend}>
-                  Unfriend
-                </button>
               </>
             ) : (
               <>
-                <button className={friendStyling} onClick={addNewFriend}>
+                {foundFriend ? "" : <button className={friendStyling} onClick={addNewFriend}>
                   Add Friend
-                </button>
+                </button>}
               </>
             )}</div>
           </div>

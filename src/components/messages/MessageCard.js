@@ -75,12 +75,17 @@ export const MessageCard = ({ message }) => {
       <div className="card">
         <div className="messages card-body ">
           <div className="card-sender-wrapper">
-            <img src={message.user.profile_pic} alt={message.user.name}></img>
+            <img src={message.user.profile_pic} alt={message.user.name} className="profilepic"></img>
             <div className="card-text" onClick={addNewFriend}>
               {message.user.name}
             </div>
             <div className="card-text">{message.user.email}</div>
-            {foundFriend ? (
+            { message.user.id === currentUser ? (
+              <>
+              </>
+            ) : (
+              <>
+              {foundFriend ? (
               <>
                 <button className={friendStyling} onClick={unfriend}>
                   Unfriend
@@ -92,6 +97,8 @@ export const MessageCard = ({ message }) => {
                   Add Friend
                 </button>
               </>
+            )}
+            </>
             )}
           {isCurrentUser? (<><button key={message.id}onClick={handleDeleteMessage}>Delete Message</button><button key={message.id} value={message.id} onClick={handleUpdateMessage}>Edit Message</button></>):(<></>)}
           </div>
