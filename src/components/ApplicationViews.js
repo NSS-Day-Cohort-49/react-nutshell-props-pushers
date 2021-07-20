@@ -8,6 +8,7 @@ import { ArticleList } from "./article/ArticleList";
 import { ArticleProvider } from "./article/ArticleProvider";
 import { TaskList } from "./tasks/TaskList";
 import { TaskProvider } from "./tasks/TaskProvider";
+import { TaskForm } from "./tasks/TaskForm";
 import { FriendProvider } from "./friends/FriendProvider";
 import { UserFriendList } from "./friends/UserFriendList";
 import { UserList } from "./user/UserList";
@@ -50,7 +51,16 @@ export const ApplicationViews = () => {
       </MessageProvider>
 
       <TaskProvider>
-        <Route path="/tasks">
+        <UserProvider>
+          <Route exact path = "/tasks/create">
+            <TaskForm />
+          </Route>
+          <Route exact path = "/tasks/edit/:taskId(\d+)">
+            <TaskForm />
+          </Route>
+        </UserProvider>
+
+        <Route exact path="/tasks">
           {/* Render the component for the user's tasks */}
           <TaskList />
         </Route>

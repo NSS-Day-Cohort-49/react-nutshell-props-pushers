@@ -2,11 +2,42 @@
 
 
 
-.task {
-    border: 1px dotted blue;
-    margin: 1rem;
+.task_list {
+    display: flex;
+    flex-wrap: wrap;
 }
 
-h1 {
+.task {
+    border: 1px dotted blue;
+    margin: 1em;
+    padding: 5px;
+    flex-basis: auto;
+}
+
+.task_header {
     font-family: "Nanum Pen Script", sans-serif;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.btn {
+    border-radius: 10%;
+    border: black dotted 2px;
+    padding: 1px;
+}
+
+.checked {
+    border-radius: 10%;
+    border: black dotted 2px;
+    padding: 1px;
+}
+
+.newtaskbtn{
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
 }

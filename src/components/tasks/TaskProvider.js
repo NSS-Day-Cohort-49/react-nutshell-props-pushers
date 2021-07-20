@@ -13,10 +13,55 @@ export const TaskProvider= (props) => {
 		.then((res) => res.json())
 		.then(setTasks)
 	}
-	console.log(tasks)
+
+
+	const addTask = taskObj => {
+        return fetch("http://localhost:8088/tasks", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(taskObj)
+        })
+        .then(getTasks)
+    }
+
+    const getTaskById = (id) => {
+        return fetch(`http://localhost:8088/tasks/${id}?_embed=users`)
+        .then(res => res.json()) // note we don't set anything on state here. Why?
+    }
+
+	const completeTask = task => {
+        return fetch(`http://localhost:8088/tasks/${task.id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(task)
+        })
+          .then(getTasks)
+      }
+
+	const deleteTask = (id) => {
+		return fetch(`http://localhost:8088/tasks/${id}`,
+		{method: "DELETE"})
+		.then(getTasks)
+	}
+
+	const updateTask = task => {
+		return fetch(`http://localhost:8088/tasks/${task.id}`, {
+			method:"PUT",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(task)
+		})
+		.then(getTasks)
+	}
+      
 	
 	return(
-		<TaskContext.Provider value={{tasks, getTasks}}>
+		<TaskContext.Provider value={{tasks, deleteTask, getTasks, addTask, getTaskById, updateTask, completeTask}}>
 			{props.children}
 		</TaskContext.Provider>
 	)

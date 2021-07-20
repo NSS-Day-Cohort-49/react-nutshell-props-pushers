@@ -21,7 +21,6 @@ export const MessageCard = ({ message }) => {
     getFriends()
   },[])
 
-
   let foundFriend = friends.find((friend)=> (currentUser === friend.currentUserId && friend.userId === message.user.id) )
   console.log("friend Search", foundFriend)
   let friendStyling = "not-friend"
