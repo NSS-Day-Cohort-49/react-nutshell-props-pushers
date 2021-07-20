@@ -23,10 +23,10 @@ export const MessageCard = ({ message }) => {
     getFriends();
   }, []);
 
-  let foundFriend = friends.find(
-    (friend) =>
-      currentUser === friend.currentUserId && friend.userId === message.user.id
-  );
+  // let foundFriend = friends.find(
+  //   (friend) =>
+  //     currentUser === friend.currentUserId && friend.userId === message.user.id
+  // );
 
   let isCurrentUser = null
     
@@ -39,11 +39,12 @@ export const MessageCard = ({ message }) => {
     }
   
  
-
-  let friendStyling = "not-friend";
-  if (foundFriend) {
-    friendStyling = "friend";
-  }
+  let foundFriend = friends.find((friend)=> (currentUser === friend.currentUserId && friend.userId === message.user.id) )
+  
+  let friendStyling = "not-friend"
+ if (foundFriend) {
+   friendStyling = "friend"
+ } 
   const addNewFriend = () => {
     const newFriendObj = {
       currentUserId: currentUser,
