@@ -32,7 +32,7 @@ export const TaskForm = () => {
   }
 
   const handleClickSaveTask = () => {
-    if (task.task === "" || task.date === "") {
+    if (task.task === task.task || task.date === task.date) {
         window.alert("Please complete the form")
     } else if (taskId) {
 			updateTask({
@@ -83,14 +83,15 @@ return (
                     <input type="date" id="date" required autoFocus className="form-control" placeholder="Enter task date" value={task.date} onChange={handleControlledInputChange} />
                 </div>
             </fieldset>
-            <button className="btn btn-primary" disabled={isLoading} onClick={
+            <div className="buttons"><button className="btns" disabled={isLoading} onClick={
                 (event) => {
                     event.preventDefault()
                     handleClickSaveTask()
                 }
             }>
                  {taskId ? <>Update Task</> : <>Save Task</>}
-            </button>
+            </button><button className="btns" onClick={() => history.goBack()}>Cancel</button>
+            </div>
         </form>
     )
 }

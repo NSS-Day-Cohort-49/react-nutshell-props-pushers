@@ -35,7 +35,7 @@ export const TaskCard = ( {task} ) => {
 			<h1 className="task_header">{task.task}</h1>
 			<div className="date">Expected completion: {task.date}</div>
 			<section className="buttons">
-			<button className="btn" onClick={taskDelete}>Delete</button><button className="btn" onClick={() => {
+			<button className="btns" onClick={taskDelete}>Delete</button><button className="btns" onClick={() => {
 				history.push(`/tasks/edit/${task.id}`)
 			}}>Edit</button><div className="checked">
 			Completed<input type="checkbox" value={task.isCompleted} onChange={handleCompleteTask}/>
