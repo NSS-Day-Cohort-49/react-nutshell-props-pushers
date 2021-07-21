@@ -49,7 +49,7 @@ export const UserCard = ({ user }) => {
             <div className="card-text">{user.email}</div>
             <div>            
             { user.id === currentUser ? (
-              <>
+              <><div className="self">*SELF*</div>
               </>
             ) : (
               <>

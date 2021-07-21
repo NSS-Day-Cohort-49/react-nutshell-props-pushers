@@ -31,7 +31,7 @@ export const TaskCard = ( {task} ) => {
 	return(
 		<>
 		<section className="task" key="tasks">
-			<h1 className="task_header">{task.task}</h1>
+			<h2 className="task_header">{task.task}</h2>
 			<div className="date">Expected completion: {task.date}</div>
 			<section className="buttons">
 			<button className="btns" onClick={taskDelete}>Delete</button><button className="btns" onClick={() => {

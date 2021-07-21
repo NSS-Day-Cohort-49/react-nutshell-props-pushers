@@ -75,7 +75,7 @@ export const MessageCard = ({ message }) => {
       <div className="card">
         <div className="messages card-body ">
           <div className="card-sender-wrapper">
-            <img src={message.user.profile_pic} alt={message.user.name} className="profilepic"></img>
+            <img src={message.user.profile_pic} alt="" className="profilepic"></img>
             <div className="card-text" onClick={addNewFriend}>
               {message.user.name}
             </div>

@@ -25,7 +25,7 @@ export const ArticleForm = () => {
 
   const handleClickSaveArticle = (event) => {
     event.preventDefault();
-    if (article.title === "" || article.synopsis === "" || article.url === "") {
+    if (article.title === undefined || article.synopsis === undefined || article.url === undefined) {
       window.alert("Please complete the form");
     } else if (articleId) {
       updateArticle(article).then(() => history.push("/"));

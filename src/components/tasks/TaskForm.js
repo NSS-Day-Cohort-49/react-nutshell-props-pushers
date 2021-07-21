@@ -32,7 +32,7 @@ export const TaskForm = () => {
   }
 
   const handleClickSaveTask = () => {
-    if (task.task !== "" || task.date !== "") {
+    if (task.task === undefined || task.date === undefined) {
         window.alert("Please complete the form")
     } else if (taskId) {
 			updateTask({
@@ -70,11 +70,11 @@ export const TaskForm = () => {
 
 return (
         <form className="taskForm">
-            <h2 className="taskForm__title">New task</h2>
+            <h1 className="taskForm__title task_header">{taskId ? "Update Task" : "New task"}</h1>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="name">Task:</label>
-                    <input type="text" id="task" required autoFocus className="form-control" placeholder="Enter a new task" value={task.task}  onChange={handleControlledInputChange} />
+                    <input type="text" id="task" required autoFocus className="form-control" placeholder="Enter a new task" value={task.task} onChange={handleControlledInputChange} />
                 </div>
             </fieldset>
             <fieldset>
@@ -89,8 +89,8 @@ return (
                     handleClickSaveTask()
                 }
             }>
-                 {taskId ? <>Update Task</> : <>Save Task</>}
-            </button><button className="btns" onClick={() => history.goBack()}>Cancel</button>
+                 {taskId ? "Update Task" : "Save Task"}
+            </button>{taskId ? <button className="btns" onClick={() => history.push("/tasks")}>Cancel</button> :<button className="btns" onClick={() => history.goBack()}>Cancel</button>}
             </div>
         </form>
     )
