@@ -44,3 +44,22 @@
     box-shadow: rgb(128 128 128 / 19%) 0.25rem 0.35rem;
 } */
 
+
+.form{
+	display: flex;
+	flex-direction: column;
+	margin:1rem;
+}
+
+.new-message-button{
+	margin:2rem 10rem 0rem 10rem;
+}
+
+img[alt]{
+  border-radius: 25%;
+  height: 13em;
+  width: 13em;
+  background-image: url(https://st2.depositphotos.com/1009634/7235/v/600/depositphotos_72350117-stock-illustration-no-user-profile-picture-hand.jpg);
+  background-position: center;
+  background-size: contain;
+}

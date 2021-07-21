@@ -1,12 +1,14 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import { MessageList } from "./messages/MessageList";
+import { MessageForm } from "./messages/MessageForm";
 import { MessageProvider } from "./messages/MessageProvider";
 import { EventForm } from "./events/EventForm"
 import { EventList } from "./events/EventList";
 import { EventProvider } from "./events/EventProvider";
 import { ArticleList } from "./article/ArticleList";
 import { ArticleProvider } from "./article/ArticleProvider";
+import { ArticleForm } from "./article/ArticleForm";
 import { TaskList } from "./tasks/TaskList";
 import { TaskProvider } from "./tasks/TaskProvider";
 import { TaskForm } from "./tasks/TaskForm";
@@ -21,9 +23,16 @@ export const ApplicationViews = () => {
   return (
     <>
       <ArticleProvider>
-        <Route exact path="/">
+        <FriendProvider><Route exact path="/">
           {/* Render the component for news articles */}
           <ArticleList />
+        </Route>
+        </FriendProvider>
+        <Route exact path="/articles/create">
+          <ArticleForm />
+        </Route>
+        <Route exact path="/articles/edit/:articleId(\d+)">
+          <ArticleForm />
         </Route>
       </ArticleProvider>
 
@@ -44,19 +53,28 @@ export const ApplicationViews = () => {
 
       <MessageProvider>
         <FriendProvider>
-        <Route path="/messages">
-          {/* Render the component for the messages */}
-          <MessageList />
-        </Route>
+          <UserProvider>
+            <Route exact path="/messages">
+              {/* Render the component for the messages */}
+              <MessageList />
+            </Route>
+
+            <Route exact path="/messages/new">
+              <MessageForm />
+            </Route>
+            <Route exact path="/messages/edit/:messageId(\d+)">
+              <MessageForm />
+            </Route>
+          </UserProvider>
         </FriendProvider>
       </MessageProvider>
 
       <TaskProvider>
         <UserProvider>
-          <Route exact path = "/tasks/create">
+          <Route exact path="/tasks/create">
             <TaskForm />
           </Route>
-          <Route exact path = "/tasks/edit/:taskId(\d+)">
+          <Route exact path="/tasks/edit/:taskId(\d+)">
             <TaskForm />
           </Route>
         </UserProvider>

@@ -1,57 +1,106 @@
-import React, {useContext, useEffect} from "react";
+import React, { useContext, useEffect } from "react";
 import "./Message.css";
 import { FriendContext } from "../friends/FriendProvider";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { MessageContext } from "./MessageProvider";
+import { useHistory } from "react-router";
 
-// Current user id 
+// Current user id
 // getFriends to check if current user is friends with the poster
 // Conditionally render the button
-// build in the id of the posting user 
+// build in the id of the posting user
 // onclick for button to add the follow record
 // create new object to send to provider
 
 export const MessageCard = ({ message }) => {
-  console.log(message.user.profile_pic);
-
-  const currentUser = parseInt(sessionStorage.getItem("nutshell_user"))
-  const {friends , getFriends, addFriend, deleteFriend} = useContext(FriendContext)
-// add addFriends when provider is built
   
-  useEffect(() => {
-    getFriends()
-  },[])
+  const history = useHistory()
+  const { deleteMessage } = useContext(MessageContext)
+  const currentUser = parseInt(sessionStorage.getItem("nutshell_user"));
+  const { friends, getFriends, addFriend, deleteFriend } =
+    useContext(FriendContext);
+  // add addFriends when provider is built
 
+  useEffect(() => {
+    getFriends();
+  }, []);
+
+  // let foundFriend = friends.find(
+  //   (friend) =>
+  //     currentUser === friend.currentUserId && friend.userId === message.user.id
+  // );
+
+  let isCurrentUser = null
+    
+  if (currentUser === message.userId){
+    
+      isCurrentUser = true
+    }else{
+      
+      isCurrentUser = null
+    }
+  
+ 
   let foundFriend = friends.find((friend)=> (currentUser === friend.currentUserId && friend.userId === message.user.id) )
-  console.log("friend Search", foundFriend)
+  
   let friendStyling = "not-friend"
  if (foundFriend) {
    friendStyling = "friend"
  } 
- const addNewFriend = ()=> {
+  const addNewFriend = () => {
+    const newFriendObj = {
+      currentUserId: currentUser,
+      userId: message.userId,
+    };
 
-  const newFriendObj = {
-    currentUserId: currentUser,
-    userId: message.userId
+    addFriend(newFriendObj);
+  };
+
+  const unfriend = () => {
+    deleteFriend(foundFriend.id);
+  };
+
+  const handleDeleteMessage = () => {
+    deleteMessage(message.id)
   }
 
-  addFriend(newFriendObj)
-
- }
-
- const unfriend = ()=>{
+  const handleUpdateMessage = ()=> {
    
-  deleteFriend(foundFriend.id)
- }
+      history.push(`/messages/edit/${message.id}`)}
+  
+ 
 
   return (
     <>
       <div className="card">
         <div className="messages card-body ">
           <div className="card-sender-wrapper">
-            <img src={message.user.profile_pic} alt={message.user.name}></img>
-            <div className="card-text" onClick={addNewFriend} >{message.user.name}</div>
+            <img src={message.user.profile_pic} alt="" className="profilepic"></img>
+            <div className="card-text" onClick={addNewFriend}>
+              {message.user.name}
+            </div>
             <div className="card-text">{message.user.email}</div>
-          {foundFriend? <><button className={friendStyling} onClick={unfriend}>Unfriend</button></> : <><button className={friendStyling} onClick={addNewFriend}>Add Friend</button></>}
+            { message.user.id === currentUser ? (
+              <>
+              </>
+            ) : (
+              <>
+              {foundFriend ? (
+              <>
+                <button className={friendStyling} onClick={unfriend}>
+                  Unfriend
+                </button>
+              </>
+            ) : (
+              <>
+                <button className={friendStyling} onClick={addNewFriend}>
+                  Add Friend
+                </button>
+              </>
+            )}
+            </>
+            )}
+          {isCurrentUser? (<><button key={message.id}onClick={handleDeleteMessage}>Delete Message</button><button key={message.id} value={message.id} onClick={handleUpdateMessage}>Edit Message</button></>):(<></>)}
           </div>
           <div className="card-message-wrapper">
             <h5 className="card-title">{message.title}</h5>
