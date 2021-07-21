@@ -8,13 +8,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // save button adds event to db, history.push events list
 
 export const EventForm = () => {
-    const { getEvents, addEvent } = useContext(EventContext)
-    const [event, setEvent] = useState({
-      // currentUserId: "",
-      // eventName: "",
-      // eventDate: "",
-      // eventLocation: "",
-      // eventZipcode: ""
+    const { addEvent } = useContext(EventContext)
+    const [eventObj, setEventObj] = useState({
+      currentUserId: "",
+      eventName: "",
+      eventDate: "",
+      eventLocation: "",
+      eventZipcode: ""
     },)
 
     const [isLoading, setIsLoading] = useState(true);
@@ -27,37 +27,33 @@ export const EventForm = () => {
   const handleControlledInputChange = (event) => {
     /* When changing a state object or array,
     always create a copy, make changes, and then set state.*/
-    const newEvent = { ...event}
+    const newEvent = { ...eventObj}
     /* Animal is an object with properties.
     Set the property to the new value
     using object bracket notation. */
     newEvent[event.target.id] = event.target.value;
     // update state
-    setEvent(newEvent)
+    setEventObj(newEvent)
   } 
   
-  const handleClickSaveEvent = () => {
+  const handleClickSaveEvent = (event) => {
       // Prevent browser from submitting the form and refreshing the page
       event.preventDefault() 
         const newEvent = {
           currentUserId: currentUser,
-          eventName: event.eventName,
-          eventDate: event.eventDate,
-          eventLocation: event.eventLocation,
-          eventZipcode: event.zipcode
+          eventName: eventObj.eventName,
+          eventDate: eventObj.eventDate,
+          eventLocation: eventObj.eventLocation,
+          eventZipcode: eventObj.eventZipcode
         }
-        console.log(newEvent)
         addEvent(newEvent)
         .then(() => history.push("/events"))
       }
   
 
     useEffect (() => {
-      getEvents().then(event => {
-      setEvent(event)
       setIsLoading(false)
-    })
-        }, [])
+    }, [])
       
         
       
@@ -70,36 +66,35 @@ export const EventForm = () => {
       <fieldset>
         <div className="form-group">
           <label htmlFor="name">event name:</label>
-          <input type="text" id="name" required autoFocus className="form-control" placeholder="event name" 
-          value={event.eventName} onChange={handleControlledInputChange} />
+          <input type="text" id="eventName" required autoFocus className="form-control" placeholder="event name" 
+          value={eventObj.eventName} onChange={handleControlledInputChange} />
         </div>
       </fieldset>
       <fieldset>
         <div className="form-group">
           <label htmlFor="name">event date:</label>
-          <input type="date" id="date" required autoFocus className="form-control" placeholder="mm/dd/yyyy" 
-          value={event.eventDate} onChange={handleControlledInputChange} />
+          <input type="date" id="eventDate" required autoFocus className="form-control" placeholder="mm/dd/yyyy" 
+          value={eventObj.eventDate} onChange={handleControlledInputChange} />
         </div>
       </fieldset>
       <fieldset>
         <div className="form-group">
           <label htmlFor="location">event location: </label>
-          <input type="text" name="location" id="location" className="form-control" placeholder="street address" 
-          value={event.eventLocation} onChange={handleControlledInputChange} />
+          <input type="text" name="eventLocation" id="eventLocation" className="form-control" placeholder="street address" 
+          value={eventObj.eventLocation} onChange={handleControlledInputChange} />
         </div>
       </fieldset>
       <fieldset>
         <div className="form-group">
           <label htmlFor="zipcode">event zipcode: </label>
-          <input type="text" name="zipcode" id="zipcode" className="form-control" placeholder="5-digit code" 
-          value={event.zipcode} onChange={handleControlledInputChange} />
+          <input type="text" name="eventZipcode" id="eventZipcode" className="form-control" placeholder="5-digit code" 
+          value={eventObj.eventZipcode} onChange={handleControlledInputChange} />
         </div>
       </fieldset>
       <button className="btn btn-primary"
         disabled={isLoading}
-        onClick={newEventObj => {
-          handleClickSaveEvent()
-        }}>
+        onClick=
+          {handleClickSaveEvent}>
             <>Save New Event </>
       </button>
     </form>
