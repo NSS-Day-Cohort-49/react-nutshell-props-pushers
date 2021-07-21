@@ -18,6 +18,8 @@ import { UserList } from "./user/UserList";
 import { FriendSearch } from "./friends/SearchFriends";
 import { UserProvider } from "./user/UserProvider";
 import { UserSearch } from "./user/SearchUsers";
+import { WeatherProvider } from "./weather/WeatherProvider";
+import { WeatherList } from "./weather/WeatherList";
 
 export const ApplicationViews = () => {
   return (
@@ -99,6 +101,15 @@ export const ApplicationViews = () => {
           </FriendProvider>
         </UserProvider>
       </EventProvider>
+
+
+      <WeatherProvider>
+        <Route path="/weather">
+          <WeatherList />
+        </Route>
+      </WeatherProvider>
     </>
+
+
   );
 };

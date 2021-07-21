@@ -22,6 +22,9 @@ export const NavBar = (props) => {
         <li className="nav-item">
           <Link className="nav-link" to="/events">Events</Link>
         </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/weather">Weather Test</Link>
+        </li>
       </ul>
     </nav>
   )
