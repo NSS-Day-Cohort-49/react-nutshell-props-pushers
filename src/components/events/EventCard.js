@@ -1,5 +1,6 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { EventContext } from "./EventProvider";
+import { useHistory } from "react-router-dom"
 import "./Event.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -13,13 +14,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 export const EventCard = ({ event }) => {
   // console.log("page render")
-  const { events, getEvents, addEvent } = useContext(EventContext)
-  const currentUser = parseInt(sessionStorage.getItem("nutshell_user"))
- 
+  const { deleteEvent } = useContext(EventContext)
 
-  useEffect(() => {
-    getEvents()
-  },[])
+  const handleDelete = () => {
+    deleteEvent(event.id)
+  }
+
+  const history = useHistory()
 
   return (
     <>
@@ -32,74 +33,18 @@ export const EventCard = ({ event }) => {
           <h6 className="card_text">Location: {event.eventLocation}</h6>
           <h6 className="card-text">Zipcode: {event.eventZipcode}</h6>
         </div>
+        <button
+          className="button"
+          onClick={() => {
+            history.push(`/events/edit/${event.id}`);
+          }}
+        >
+          Edit Event
+        </button>
+        <button className="button" onClick={handleDelete}>
+          Delete Event
+        </button>
       </section>
     </>
   );
   }
-
-
-
-
-/* ======= MESSAGE CARD =============== */
-/*export const MessageCard = ({ message }) => {
-  console.log(message.user.profile_pic);
-
-  const currentUser = parseInt(sessionStorage.getItem("nutshell_user"))
-  const {friends , getFriends, addFriend, deleteFriend} = useContext(FriendContext)
-// add addFriends when provider is built
-  
-  useEffect(() => {
-    getFriends()
-  },[])
-
-
-  let foundFriend = friends.find((friend)=> (currentUser === friend.currentUserId && friend.userId === message.user.id) )
-  console.log("friend Search", foundFriend)
-  let friendStyling = "not-friend"
- if (foundFriend) {
-   friendStyling = "friend"
- } 
- const addNewFriend = ()=> {
-
-  const newFriendObj = {
-    currentUserId: currentUser,
-    userId: message.userId
-  }
-
-  addFriend(newFriendObj)
-
- }
-
- const unfriend = ()=>{
-   
-  deleteFriend(foundFriend.id)
- }
-
-  return (
-    <>
-      <div className="card">
-        <div className="messages card-body ">
-          <div className="card-sender-wrapper">
-            <img src={message.user.profile_pic} alt={message.user.name}></img>
-            <div className="card-text" onClick={addNewFriend} >{message.user.name}</div>
-            <div className="card-text">{message.user.email}</div>
-          {foundFriend? <><button className={friendStyling} onClick={unfriend}>Unfriend</button></> : <><button className={friendStyling} onClick={addNewFriend}>Add Friend</button></>}
-          </div>
-          <div className="card-message-wrapper">
-            <h5 className="card-title">{message.title}</h5>
-            <h6 className="card-subtitle mb-2 text-muted">{message.message}</h6>
-          </div>
-          // {/* <a href={article.url} class="card-link">Card link</a> */
-          // {/* <a href="#" class="card-link">Posted By: {article.user.name}</a> */}
-    //       </div>
-    //       </div>
-    //     </>
-    //   );
-    // };
-
- 
-    /*  const deleteMessage = (id) =>{
-			return fetch(`http://localhost:8088/messages/${id}`,{
-				method:"DELETE"})
-				.then(getMessages)
-		}  */
