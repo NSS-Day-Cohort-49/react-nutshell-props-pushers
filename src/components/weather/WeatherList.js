@@ -16,9 +16,9 @@ export const WeatherList = () => {
   return (
     <>
     <h3>Im here</h3>
-      {weather.list.map((w) => {
+      {/* {weather.list.map((w) => {
         return <WeatherCard  weather={w} />;
-      })}
+      })} */}
     </>
   );
 };
