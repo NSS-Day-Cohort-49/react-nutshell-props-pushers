@@ -35,25 +35,17 @@ export const EventForm = () => {
     // update state
     setEvent(newEvent)
   } 
-
-  // const handleSaveMessage = () => {
-  //   if (messageId) {
-  //     updateMessage(message).then(history.push("/messages"));
-  //   } else {
-  //     addMessage(message).then(history.push("/messages"));
-  //   }
-  // };
   
   const handleClickSaveEvent = () => {
       // Prevent browser from submitting the form and refreshing the page
       event.preventDefault() 
-        // const newEvent = {
-        //   currentUserId: currentUser,
-        //   eventName: event.eventName,
-        //   eventDate: event.eventDate,
-        //   eventLocation: event.eventLocation,
-        //   eventZipcode: event.zipcode
-        // }
+        const newEvent = {
+          currentUserId: currentUser,
+          eventName: event.eventName,
+          eventDate: event.eventDate,
+          eventLocation: event.eventLocation,
+          eventZipcode: event.zipcode
+        }
         console.log(newEvent)
         addEvent(newEvent)
         .then(() => history.push("/events"))
@@ -64,7 +56,7 @@ export const EventForm = () => {
       getEvents().then(event => {
       setEvent(event)
       setIsLoading(false)
-          })
+    })
         }, [])
       
         
@@ -112,7 +104,7 @@ export const EventForm = () => {
       </button>
     </form>
       )
-      }
+    }
       
 
 //  //when a field changes, update state. The return will re-render and display based on the values in state
@@ -126,5 +118,13 @@ export const EventForm = () => {
 //     using object bracket notation. */
 //     newTask[event.target.id] = event.target.value
 //     // update state
+
+  // const handleSaveMessage = () => {
+  //   if (messageId) {
+  //     updateMessage(message).then(history.push("/messages"));
+  //   } else {
+  //     addMessage(message).then(history.push("/messages"));
+  //   }
+  // };
 //     setTask(newTask)
 //   }

@@ -68,6 +68,7 @@ export const TaskForm = () => {
     }
 }, [])
 
+
 return (
         <form className="taskForm">
             <h2 className="taskForm__title">New task</h2>
@@ -83,8 +84,9 @@ return (
                     <input type="date" id="date" required autoFocus className="form-control" placeholder="Enter task date" value={task.date} onChange={handleControlledInputChange} />
                 </div>
             </fieldset>
-            <button className="btn btn-primary" disabled={isLoading} onClick={
-                (event) => {
+            <button className="btn btn-primary" 
+                disabled={isLoading} 
+                onClick={(event) => {
                     event.preventDefault()
                     handleClickSaveTask()
                 }
