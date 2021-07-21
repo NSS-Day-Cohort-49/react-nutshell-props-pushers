@@ -8,9 +8,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // save button adds event to db, history.push events list
 
 export const EventForm = () => {
-    const { addEvent } = useContext(EventContext)
+  const { addEvent } = useContext(EventContext)
+  const currentUser = parseInt(sessionStorage.getItem("nutshell_user"));
     const [eventObj, setEventObj] = useState({
-      currentUserId: "",
+      userId: currentUser,
       eventName: "",
       eventDate: "",
       eventLocation: "",
@@ -20,7 +21,6 @@ export const EventForm = () => {
     const [isLoading, setIsLoading] = useState(true);
     const history = useHistory();
 
-    const currentUser = parseInt(sessionStorage.getItem("nutshell_user"));
     
      //when a field changes, update state. The return will re-render and display based on the values in state
   //Controlled component
@@ -34,19 +34,22 @@ export const EventForm = () => {
     newEvent[event.target.id] = event.target.value;
     // update state
     setEventObj(newEvent)
+    console.log(newEvent)
   } 
+  
   
   const handleClickSaveEvent = (event) => {
       // Prevent browser from submitting the form and refreshing the page
       event.preventDefault() 
-        const newEvent = {
-          currentUserId: currentUser,
-          eventName: eventObj.eventName,
-          eventDate: eventObj.eventDate,
-          eventLocation: eventObj.eventLocation,
-          eventZipcode: eventObj.eventZipcode
-        }
-        addEvent(newEvent)
+        // const newEvent = {
+        //   userId: currentUser,
+        //   eventName: eventObj.eventName,
+        //   eventDate: eventObj.eventDate,
+        //   eventLocation: eventObj.eventLocation,
+        //   eventZipcode: eventObj.eventZipcode
+        // }
+        console.log(eventObj)
+        addEvent(eventObj)
         .then(() => history.push("/events"))
       }
   
@@ -55,9 +58,6 @@ export const EventForm = () => {
       setIsLoading(false)
     }, [])
       
-        
-      
-
  // return ternary button syntax: {eventId ? <>Save event</> : <>Add event</>}
 
       return (
@@ -101,25 +101,3 @@ export const EventForm = () => {
       )
     }
       
-
-//  //when a field changes, update state. The return will re-render and display based on the values in state
-//   //Controlled component
-//   const handleControlledInputChange = (event) => {
-//     /* When changing a state object or array,
-//     always create a copy, make changes, and then set state.*/
-//     const newTask = { ...task }
-//     /* Animal is an object with properties.
-//     Set the property to the new value
-//     using object bracket notation. */
-//     newTask[event.target.id] = event.target.value
-//     // update state
-
-  // const handleSaveMessage = () => {
-  //   if (messageId) {
-  //     updateMessage(message).then(history.push("/messages"));
-  //   } else {
-  //     addMessage(message).then(history.push("/messages"));
-  //   }
-  // };
-//     setTask(newTask)
-//   }
