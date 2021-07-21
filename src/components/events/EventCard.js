@@ -33,6 +33,14 @@ export const EventCard = ({ event }) => {
           <h6 className="card_text">Location: {event.eventLocation}</h6>
           <h6 className="card-text">Zipcode: {event.eventZipcode}</h6>
         </div>
+        <button
+          className="button"
+          onClick={() => {
+            history.push(`/events/edit/${event.id}`);
+          }}
+        >
+          Edit Event
+        </button>
         <button className="button" onClick={handleDelete}>
           Delete Event
         </button>
