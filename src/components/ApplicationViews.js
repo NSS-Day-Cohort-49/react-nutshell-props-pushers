@@ -22,7 +22,8 @@ export const ApplicationViews = () => {
   return (
     <>
       <ArticleProvider>
-        <FriendProvider><Route exact path="/">
+        <FriendProvider>
+          <Route exact path="/">
           {/* Render the component for news articles */}
           <ArticleList />
         </Route>
