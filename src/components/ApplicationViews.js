@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 import { MessageList } from "./messages/MessageList";
 import { MessageForm } from "./messages/MessageForm";
 import { MessageProvider } from "./messages/MessageProvider";
+import { EventForm } from "./events/EventForm"
 import { EventList } from "./events/EventList";
 import { EventProvider } from "./events/EventProvider";
 import { ArticleList } from "./article/ArticleList";
@@ -85,10 +86,18 @@ export const ApplicationViews = () => {
       </TaskProvider>
 
       <EventProvider>
-        <Route path="/events">
-          {/* Render the component for the user's events */}
-          <EventList />
-        </Route>
+        <UserProvider>
+          <FriendProvider>
+            <Route exact path="/events">
+              {/* Render the component for the user's events */}
+              <EventList />
+            </Route>
+            <Route path="/events/create">
+              {/* Render the component for the user's events */}
+              <EventForm />
+            </Route>
+          </FriendProvider>
+        </UserProvider>
       </EventProvider>
     </>
   );

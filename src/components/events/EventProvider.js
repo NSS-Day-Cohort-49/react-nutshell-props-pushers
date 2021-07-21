@@ -1,21 +1,39 @@
 import React, { useState, createContext } from "react";
-import "./Event.css";
 
 export const EventContext = createContext();
 
 export const EventProvider = (props) => {
   const [events, setEvents] = useState([]);
 
+
+
   const getEvents = () => {
-    return fetch("http://localhost:8088/events?_expand=user")
+    return fetch("http://localhost:8088/events")
       .then((res) => res.json())
-      .then(setEvents);
+      .then(setEvents)
   };
-  console.log(events);
+
+  const addEvent = (newEventObj) => {
+    return fetch("http://localhost:8088/events",{
+      method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(newEventObj)})
+        .then(getEvents)
+      }
+
+  const deleteEvent = (id) => {
+    return fetch(`http://localhost:8088/events/${id}`,
+    {method: "DELETE"})
+		.then(getEvents)
+	}
 
   return (
-    <EventContext.Provider value={{ events, getEvents }}>
+    <EventContext.Provider value={{ events, getEvents, addEvent, deleteEvent }}>
       {props.children}
     </EventContext.Provider>
   );
 };
+
+// return fetch("http://localhost:8088/currentUsers/${id}/events?_expand=user")

@@ -68,6 +68,7 @@ export const TaskForm = () => {
     }
 }, [])
 
+
 return (
         <form className="taskForm">
             <h1 className="taskForm__title task_header">{taskId ? "Update Task" : "New task"}</h1>
