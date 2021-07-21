@@ -18,7 +18,6 @@ export const MessageForm = () => {
   const [message, setMessage] = useState({
     title: "",
     message: "",
-    recipientId: "",
     userId: parseInt(sessionStorage.getItem("nutshell_user")),
   });
 
@@ -85,7 +84,7 @@ export const MessageForm = () => {
           className="form-control"
           onChange={handleControlledInputChange}
         >
-          <option value="0">Select a Recipient</option>
+          <option>Select a Recipient</option>
           {users.map((user) => {
             return (
               <option key={user.id} value={user.id}>

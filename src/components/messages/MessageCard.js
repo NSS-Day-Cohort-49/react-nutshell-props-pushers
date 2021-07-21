@@ -73,7 +73,7 @@ export const MessageCard = ({ message }) => {
   return (
     <>{message.recipientId === undefined || message.userId === currentUser ? 
       <div className="card">
-        <div className="messages card-body ">
+        <div className="messages card-body">
           <div className="card-sender-wrapper">
           <h3>Sender</h3>
             <img src={message.user.profile_pic} alt="" className="profilepic"></img>
@@ -103,10 +103,10 @@ export const MessageCard = ({ message }) => {
             )}
             </>
             )}
-          {isCurrentUser? (<><button key={message.id}onClick={handleDeleteMessage}>Delete Message</button><button key={message.id} value={message.id} onClick={handleUpdateMessage}>Edit Message</button></>):(<></>)}
+          {isCurrentUser? (<><button key={Math.random(message.id)} onClick={handleDeleteMessage}>Delete Message</button><button key={message.id} value={message.id} onClick={handleUpdateMessage}>Edit Message</button></>):(<></>)}
           </div>
           <div className="card-message-wrapper">
-          {message.recipientId === undefined ? " ": "Private"}
+          {message.recipientId === undefined ? "" : "Private"}
             <h5 className="card-title">{message.title}</h5>
             <h6 className="card-subtitle mb-2 text-muted">{message.message}</h6>
           </div>
