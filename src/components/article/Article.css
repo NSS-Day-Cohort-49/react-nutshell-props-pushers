@@ -12,3 +12,8 @@
   border: rgba(128, 128, 128, 0.659) 0.1rem solid;
   background-color: rgba(0, 255, 166, 0.427);
 }
+
+.friend_article {
+  background-color: cornsilk;
+  font-style: italic;
+}

@@ -36,3 +36,8 @@
 	margin: 1rem;
     box-shadow: rgb(128 128 128 / 19%) 0.25rem 0.35rem;
 } */
+
+.friend_event {
+  background-color: cornsilk;
+  font-style: italic;
+}
