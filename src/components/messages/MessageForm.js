@@ -77,7 +77,7 @@ export const MessageForm = () => {
           value={message.message}
           onChange={handleControlledInputChange}
         ></input>
-        <label htmlFor="message-recipient">Select a Recipient</label>
+        <label htmlFor="message-recipient">PRIVATE MESSAGE ONLY:</label>
         <select
           name="messageId"
           id="recipientId"
