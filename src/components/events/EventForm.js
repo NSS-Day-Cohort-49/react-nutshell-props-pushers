@@ -1,14 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { EventContext } from "./EventProvider";
-import { useHistory } from 'react-router-dom';
-import "./Event.css";
+import { useHistory, useParams } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 // addEvent form input: event name, date, location, zipcode
 // save button adds event to db, history.push events list
 
 export const EventForm = () => {
-  const { addEvent } = useContext(EventContext)
+  const { addEvent, getEventById, updateEvent } = useContext(EventContext)
   const currentUser = parseInt(sessionStorage.getItem("nutshell_user"));
     const [eventObj, setEventObj] = useState({
       userId: currentUser,
@@ -20,49 +19,42 @@ export const EventForm = () => {
 
     const [isLoading, setIsLoading] = useState(true);
     const history = useHistory();
+    const { eventId } = useParams();
 
     
      //when a field changes, update state. The return will re-render and display based on the values in state
   //Controlled component
   const handleControlledInputChange = (event) => {
-    /* When changing a state object or array,
-    always create a copy, make changes, and then set state.*/
     const newEvent = { ...eventObj}
-    /* Animal is an object with properties.
-    Set the property to the new value
-    using object bracket notation. */
     newEvent[event.target.id] = event.target.value;
-    // update state
     setEventObj(newEvent)
-    console.log(newEvent)
   } 
   
   
   const handleClickSaveEvent = (event) => {
-      // Prevent browser from submitting the form and refreshing the page
-      event.preventDefault() 
-        // const newEvent = {
-        //   userId: currentUser,
-        //   eventName: eventObj.eventName,
-        //   eventDate: eventObj.eventDate,
-        //   eventLocation: eventObj.eventLocation,
-        //   eventZipcode: eventObj.eventZipcode
-        // }
-        console.log(eventObj)
+      // event.preventDefault() 
+      if (eventId) {
+        updateEvent(eventObj).then(history.push("/events"))
+      } else {
         addEvent(eventObj)
-        .then(() => history.push("/events"))
-      }
+        .then(history.push("/events"))
+      }}
   
-
     useEffect (() => {
-      setIsLoading(false)
+      if (eventId) {
+        getEventById(eventId).then((event) => {
+          setEventObj(event)
+          console.log(event)
+          setIsLoading(false)
+        });
+      } else {
+        setIsLoading(false)
+      }
     }, [])
-      
- // return ternary button syntax: {eventId ? <>Save event</> : <>Add event</>}
 
       return (
         <form className="eventForm">
-      <h2 className="eventForm__title">New Event</h2>
+      <h1 className="eventForm__title event_header">{eventId ? "Update Event" : "New Event"}</h1>
       <fieldset>
         <div className="form-group">
           <label htmlFor="name">event name:</label>
@@ -91,13 +83,15 @@ export const EventForm = () => {
           value={eventObj.eventZipcode} onChange={handleControlledInputChange} />
         </div>
       </fieldset>
-      <button className="btn btn-primary"
-        disabled={isLoading}
-        onClick=
-          {handleClickSaveEvent}>
-            <>Save New Event </>
-      </button>
+      <div className="buttons"><button className="btns" disabled={isLoading} 
+              onClick={handleClickSaveEvent}
+            >
+                 {eventId ? "Update Event" : "Post New Event"}
+            </button>
+            </div>
     </form>
       )
     }
+
+    // event.preventDefault()
       

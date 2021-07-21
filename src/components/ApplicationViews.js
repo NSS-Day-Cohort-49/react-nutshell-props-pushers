@@ -93,7 +93,11 @@ export const ApplicationViews = () => {
               <EventList />
             </Route>
             <Route path="/events/create">
-              {/* Render the component for the user's events */}
+              {/* Render the component for creating new event */}
+              <EventForm />
+            </Route>
+            <Route exact path="/events/edit/:eventId(\d+)">
+              {/* Render the component for editing event saved to state */}
               <EventForm />
             </Route>
           </FriendProvider>
