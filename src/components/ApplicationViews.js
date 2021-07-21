@@ -22,10 +22,11 @@ export const ApplicationViews = () => {
   return (
     <>
       <ArticleProvider>
-        <Route exact path="/">
+        <FriendProvider><Route exact path="/">
           {/* Render the component for news articles */}
           <ArticleList />
         </Route>
+        </FriendProvider>
         <Route exact path="/articles/create">
           <ArticleForm />
         </Route>

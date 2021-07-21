@@ -1,5 +1,5 @@
-import React, { useContext, useState, useEffect } from 'react'
-import { useHistory, useParams } from 'react-router-dom'
+import React, { useContext } from 'react'
+import { useHistory } from 'react-router-dom'
 import "./Task.css"
 import { TaskContext } from './TaskProvider'
 
@@ -9,7 +9,6 @@ export const TaskCard = ( {task} ) => {
 	const { completeTask, deleteTask} = useContext(TaskContext)
   
 	const history = useHistory();
-	const { taskId } = useParams();
   
 
 	const handleCompleteTask = () => {
@@ -32,10 +31,10 @@ export const TaskCard = ( {task} ) => {
 	return(
 		<>
 		<section className="task" key="tasks">
-			<h1 className="task_header">{task.task}</h1>
+			<h2 className="task_header">{task.task}</h2>
 			<div className="date">Expected completion: {task.date}</div>
 			<section className="buttons">
-			<button className="btn" onClick={taskDelete}>Delete</button><button className="btn" onClick={() => {
+			<button className="btns" onClick={taskDelete}>Delete</button><button className="btns" onClick={() => {
 				history.push(`/tasks/edit/${task.id}`)
 			}}>Edit</button><div className="checked">
 			Completed<input type="checkbox" value={task.isCompleted} onChange={handleCompleteTask}/>
