@@ -12,7 +12,7 @@ export const WeatherCard = ({w}) => {
 		<section className="weather">
 		<h3>Current Weather</h3>
 		{console.log(w)}
-		{/* <div>This is the forecast for {w.list.clouds.all}</div> */}
+		{/* <div>This is the forecast for {w.list.dt}</div> */}
 		</section>
 		</>
 	)
