@@ -93,7 +93,9 @@ export const MessageCard = ({ message }) => {
               </>
             ) : (
               <>
-                <button className={friendStyling} onClick={addNewFriend}>
+                <button className={friendStyling} onClick={() =>
+                  {window.confirm(('Continue with adding friend?'))
+                  {addNewFriend()}}}>
                   Add Friend
                 </button>
               </>
