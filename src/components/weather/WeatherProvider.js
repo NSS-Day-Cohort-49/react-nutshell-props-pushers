@@ -14,7 +14,7 @@ export const WeatherProvider = (props) => {
       `https://api.openweathermap.org/data/2.5/forecast?zip=${zipCode}&units=imperial&appid=${APIKey}`
     )
       .then((res) => res.json())
-      .then(setWeather).then(console.log(weather));
+      .then(setWeather);
   };
 
   return (
