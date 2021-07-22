@@ -24,20 +24,24 @@ export const ArticleList = () => {
 
   return (
     <>
-      <h2>News Articles</h2>
-      <button
-        onClick={() => {
-          history.push("/articles/create");
-        }}
-      >
-        Add New Article
-      </button>
-      <div className="article_list">
-        {console.log("ArticleList - Render", sortedArticles)}
-        {sortedArticles.map((article) => {
-          return <ArticleCard key={article.id} article={article} />;
-        })}
-      </div>
+      <section className="news_articles">
+        <h1 className="article_header">News Articles</h1>
+
+        <button className="new_article_button"
+          onClick={() => {
+            history.push("/articles/create");
+          }}
+        >
+          Add New Article
+        </button>
+
+        <div className="article_list">
+          {console.log("ArticleList - Render", sortedArticles)}
+          {sortedArticles.map((article) => {
+            return <ArticleCard key={article.id} article={article} />;
+          })}
+        </div>
+      </section>
     </>
   );
 };

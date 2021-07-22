@@ -11,9 +11,9 @@ export const FriendCard = ({ friend }) => {
 
   return (
     <>
-      <div className="col">
+      <div className="col ">
         <div className="card">
-          <div className="card-body">
+          <div className="card-body user-friend">
             {/* <img
               src={friend.user.profile_pic}
               className="card-img-top"

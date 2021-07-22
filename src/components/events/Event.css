@@ -41,3 +41,29 @@
   background-color: cornsilk;
   font-style: italic;
 }
+
+.events{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	margin: 2rem 10rem 2rem 10rem;
+}
+
+.event-header{
+	margin: 2rem;
+}
+
+.button-events{
+	margin: .5rem;
+	padding: 1rem;
+}
+
+.event_buttons{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	flex-basis: 25%;
+	margin: 1rem 4rem 1rem 0rem;
+	
+}

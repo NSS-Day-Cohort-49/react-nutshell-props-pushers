@@ -24,11 +24,14 @@ export const MessageList = () => {
 
   return (
     <>
+    <section className="message_list">
+    <h1 className="message_header">Messages</h1>
       {console.log("MessageList - Render: messages", messages)}
-      <button onClick={handleSendNewMessage}>Send New Message</button>
+      <button className="new_message_button"onClick={handleSendNewMessage}>Send New Message</button>
       {sortedMessages.map((message) => {
         return <MessageCard key={message.id} message={message} />;
       })}
+      </section>
     </>
   );
 };

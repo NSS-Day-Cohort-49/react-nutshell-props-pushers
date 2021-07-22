@@ -8,10 +8,14 @@
 }
 
 .task {
-    border: 1px dotted blue;
+    /* border: 1px dotted blue; */
     margin: 1em;
-    padding: 5px;
+    padding: 1rem;
     flex-basis: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
 }
 
 .task_header {
@@ -22,17 +26,19 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    margin: .5rem;
 }
 
 .btns {
     border-radius: 10%;
-    border: black dotted 2px;
+    /* border: black dotted 2px; */
     padding: 1px;
+    
 }
 
 .checked {
     border-radius: 10%;
-    border: black dotted 2px;
+    /* border: black dotted 2px; */
     padding: 1px;
 }
 

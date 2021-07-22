@@ -7,11 +7,15 @@ export const FriendSearch = () => {
 
   return (
     <>
-      Friend search:
+    <h1 className="user_header"> My Friends</h1>
+    <section className="search_bar">
+     <div>Friend search:</div>
       <input type="text"
         className="input--wide"
         onKeyUp={(event) => setSearchTerms(event.target.value)}
-        placeholder="Search for an Friend... " />
+        placeholder="Search for an Friend... "
+	 />
+	</section>
     </>
   )
 }
