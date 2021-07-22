@@ -34,18 +34,18 @@ export const EventCard = ({ event }) => {
 console.log(foundFriend)
 
 const forecastList = weather.list
-let foundWeatherArr = []
+let foundWeather = ""
 
 if (event){
-  foundWeatherArr = forecastList.filter(w => {
+  foundWeather = forecastList.filter(w => {
     
    return w.dt_txt.startsWith(event.eventDate)})
 }
 
-let middleDayWeather = foundWeatherArr[5]
+let middleDayWeather = foundWeather[3]
 
 
-console.log( middleDayWeather)
+console.log( parseInt(middleDayWeather?.main.temp))
 
   const history = useHistory()
 
@@ -60,8 +60,9 @@ console.log( middleDayWeather)
           <h5 className="card-text">Date: {event.eventDate}</h5>
           <h6 className="card_text">Location: {event.eventLocation}</h6>
           <h6 className="card-text">Zipcode: {event.eventZipcode}</h6>
+        
+          </div>
        
-        </div>
         <button
           className="button"
           onClick={() => {
@@ -82,6 +83,8 @@ console.log( middleDayWeather)
           <h5 className="card-text">Date: {event.eventDate}</h5>
           <h6 className="card_text">Location: {event.eventLocation}</h6>
           <h6 className="card-text">Zipcode: {event.eventZipcode}</h6>
+          <div>{parseInt(middleDayWeather?.main.temp)}</div>
+         
         </div>
         <section className="event_buttons">
         <button
