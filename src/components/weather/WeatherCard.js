@@ -3,14 +3,15 @@ import { WeatherContext } from './WeatherProvider'
 
 export const WeatherCard = ({w}) => {
 
-	const date = Date(w.dt)
+	
 
 	return(
 		<>
 		<section className="weather">
-		<h3>Current Weather</h3>
-		{console.log(w)}
-		<div>This is the forecast for this date {date.toString()}</div>
+		
+		<h3>Forecast for {w.dt_txt}</h3>
+		<h4>{w.weather[0].description} with a Low of {parseInt((w.main.temp_min - 273.15)* 1.8000+ 32.00)} and a high of {parseInt((w.main.temp_max - 273.15)* 1.8000+ 32.00)}</h4>
+		<div>Humidity: {w.main.humidity}%</div>
 		</section>
 		</>
 	)
