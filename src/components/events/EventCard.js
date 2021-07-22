@@ -67,6 +67,7 @@ console.log(foundFriend)
           <h6 className="card_text">Location: {event.eventLocation}</h6>
           <h6 className="card-text">Zipcode: {event.eventZipcode}</h6>
         </div>
+        <section className="event_buttons">
         <button
           className="button"
           onClick={() => {
@@ -78,6 +79,7 @@ console.log(foundFriend)
         <button className="button" onClick={handleDelete}>
           Delete Event
         </button>
+        </section>
       </section> : ""
 
       }

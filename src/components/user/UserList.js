@@ -34,9 +34,10 @@ export const UserList = () => {
   
   return (
     <>
+    <section className="user-friend-buttons">
       <button onClick={() => history.push("/friends")}>My Friends</button>
       <button onClick={() => history.push("/users")}> All Users </button>
-      <h1 className="user_header"> All Users</h1>
+      </section>
       <div className="row row-cols-1 row-cols-md-3 g-4">
         {filteredUsers.map((user) => {
           return <UserCard key={user.id} user={user} />;

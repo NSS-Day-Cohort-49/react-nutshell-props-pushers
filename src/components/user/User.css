@@ -1,0 +1,20 @@
+.user-friend-buttons{
+	margin: 1rem;
+	padding: .5rem;
+	display: flex;
+	justify-content: space-evenly;
+
+}
+
+.search_bar{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	margin:2rem 25rem 2rem 25rem;
+}
+
+.user-friend{
+	justify-content: space-between;
+}
+

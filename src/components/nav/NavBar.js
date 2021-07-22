@@ -8,6 +8,9 @@ export const NavBar = (props) => {
 
       <ul className="nav nav-pills nav-fill">
         <li className="nav-item">
+          <Link className="nav-link" to="/">Nutshell</Link>
+        </li>
+        <li className="nav-item">
           <Link className="nav-link" to="/">Articles</Link>
         </li>
         <li className="nav-item">

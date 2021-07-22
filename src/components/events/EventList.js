@@ -15,6 +15,8 @@ export const EventList = () => {
 
   return (
     <>
+    <section className="events">
+    <h1 className="event-header">Events</h1>
     <div className="button-events">
       <button className="addButton" onClick={() => history.push("/events/create")}>
           Add a New Event?
@@ -24,6 +26,7 @@ export const EventList = () => {
         // if event is most recent one, style differently 
         return <EventCard key={event.id} event={event} />;
       })}
+      </section>
     </>
   );
 };
