@@ -54,8 +54,8 @@ export const ArticleForm = () => {
   }, []);
 
   return (
-    <form className="animalForm">
-      <h2 className="animalForm__title">New Article</h2>
+    <form className="ariticle_Form">
+      <h2 className="ariticle_Form__title">New Article</h2>
       <fieldset>
         <div className="form-group">
           <label htmlFor="name">Article Title:</label>
