@@ -71,7 +71,7 @@ export const MessageCard = ({ message }) => {
  
 
   return (
-    <>{message.recipientId === undefined || message.userId === currentUser ? 
+    <>{message.recipientId === undefined || parseInt(message.recipientId) === currentUser || message.userId === currentUser ? 
       <div className="card">
         <div className="messages card-body">
           <div className="card-sender-wrapper">
