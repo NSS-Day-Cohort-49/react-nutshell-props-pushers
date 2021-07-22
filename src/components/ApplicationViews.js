@@ -89,6 +89,7 @@ export const ApplicationViews = () => {
       </TaskProvider>
 
       <EventProvider>
+        <WeatherProvider>
         <UserProvider>
           <FriendProvider>
             <Route exact path="/events">
@@ -105,6 +106,7 @@ export const ApplicationViews = () => {
             </Route>
           </FriendProvider>
         </UserProvider>
+        </WeatherProvider>
       </EventProvider>
 
 

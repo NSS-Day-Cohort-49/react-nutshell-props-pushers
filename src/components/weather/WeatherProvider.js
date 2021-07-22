@@ -11,7 +11,7 @@ export const WeatherProvider = (props) => {
 
   const getWeather = (zipCode) => {
     return fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?zip=${zipCode}&appid=${APIKey}`
+      `https://api.openweathermap.org/data/2.5/forecast?zip=${zipCode}&units=imperial&appid=${APIKey}`
     )
       .then((res) => res.json())
       .then(setWeather).then(console.log(weather));

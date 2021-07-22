@@ -4,6 +4,7 @@ import { EventCard } from "./EventCard";
 import { EventContext } from "./EventProvider";
 import "./Event.css";
 
+
 export const EventList = () => {
   const { events, getEvents } = useContext(EventContext);
   const history = useHistory()

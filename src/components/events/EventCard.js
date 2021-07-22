@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom"
 import "./Event.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FriendContext } from "../friends/FriendProvider";
+import { WeatherContext } from "../weather/WeatherProvider";
 
 // √ render event card when invoked by EventList
 // √ map through events, render those filtered current user and by friend
@@ -18,19 +19,33 @@ export const EventCard = ({ event }) => {
   const { deleteEvent } = useContext(EventContext)
   const currentUser = parseInt(sessionStorage.getItem("nutshell_user"));
   const { friends, getFriends } = useContext(FriendContext);
+  const { weather, getWeather} = useContext(WeatherContext)
 
   const handleDelete = () => {
     deleteEvent(event.id)
   }
 
   useEffect(() => {
-    getFriends(friends)
-    console.log(friends)
+    getFriends(friends).then(getWeather(event.eventZipcode)).then(
+    console.log(friends ,"weather", weather))
   }, [])
 
   let foundFriend = friends.find(friend => event.userId === friend.userId)
 console.log(foundFriend)
 
+const forecastList = weather.list
+let foundWeatherArr = []
+
+if (event){
+  foundWeatherArr = forecastList.filter(w => {
+    
+   return w.dt_txt.startsWith(event.eventDate)})
+}
+
+let middleDayWeather = foundWeatherArr[5]
+
+
+console.log( middleDayWeather)
 
   const history = useHistory()
 
@@ -45,6 +60,7 @@ console.log(foundFriend)
           <h5 className="card-text">Date: {event.eventDate}</h5>
           <h6 className="card_text">Location: {event.eventLocation}</h6>
           <h6 className="card-text">Zipcode: {event.eventZipcode}</h6>
+       
         </div>
         <button
           className="button"
